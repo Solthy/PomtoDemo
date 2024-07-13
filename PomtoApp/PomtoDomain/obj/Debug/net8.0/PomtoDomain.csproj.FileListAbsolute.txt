@@ -1,0 +1,11 @@
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\bin\Debug\net8.0\PomtoDomain.deps.json
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\bin\Debug\net8.0\PomtoDomain.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\bin\Debug\net8.0\PomtoDomain.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.AssemblyInfoInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.AssemblyInfo.cs
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.csproj.CoreCompileInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\refint\PomtoDomain.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\PomtoDomain.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoDomain\obj\Debug\net8.0\ref\PomtoDomain.dll

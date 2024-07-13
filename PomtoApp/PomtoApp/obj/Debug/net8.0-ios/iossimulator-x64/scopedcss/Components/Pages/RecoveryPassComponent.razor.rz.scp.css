@@ -1,0 +1,27 @@
+.card[b-lvxx8yq715] {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity:0.8;
+}
+
+.centered-content[b-lvxx8yq715] {
+    text-align: center;
+    align-items:center;
+}
+
+.cardButton[b-lvxx8yq715] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 15px 0 0;
+}
+
+.card-content[b-lvxx8yq715] {
+    display: flex;
+    justify-content: center; /* Espa�o uniforme entre os itens */
+}

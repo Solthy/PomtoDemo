@@ -1,0 +1,94 @@
+﻿@page "/recovery-pass"
+<MudThemeProvider />
+<MudSnackbarProvider/>
+
+<EditForm Model="@employeeRPL" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card">
+        <div class="centered-content">
+            <MudText Typo="Typo.h6" Style="@($"color:{Colors.LightBlue.Darken3};")" Class="d-flex align-center justify-center">
+                <MudIcon Icon="@Icons.Material.Filled.MailLock" Style="@($"color:{Colors.LightBlue.Darken3};")" Class="mr-5" /> Login
+            </MudText>
+            <MudTextField class="mt-5" @bind-Value="employeeRPL.UserEmail" For="@(() => employeeRPL.UserEmail)" Margin="Margin.Dense" Label="Email de Recuperação" HelperText="Insira o email para recuperar as credências" HelperTextOnFocus="true" Variant="Variant.Outlined" />
+        </div>
+        <div class="cardButton">
+            <div class="card-content">
+                <MudButton StartIcon="@Icons.Material.Filled.Email" OnClick="RecoveryEmail" ButtonType="@ButtonType.Submit" Style="height:fit-content" Variant="@Variant.Filled" FullWidth Color="Color.Info">Recuperar</MudButton>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    EmployeeRPL employeeRPL = new EmployeeRPL();
+    RequestLicencaRPL requestLicencaRPL = new RequestLicencaRPL();
+
+    private bool showLeaveAlert = false;
+    bool sucess;
+
+    private void OnValidSubmit(EditContext context)
+    {
+        sucess = true;
+        StateHasChanged();
+    }
+
+    private async Task RecoveryEmail()
+    {
+        var itens = await employeeRPL.EmailRecovery(employeeRPL.EmailConvertToLowerCase(employeeRPL.UserEmail));
+        if (employeeRPL.Success == true && itens != null)
+        {
+            StateSucessMensage("Email Válido! Estamos tentando enviar as suas credencias");
+            await Task.Delay(1500);
+            bool verify = employeeRPL.IsConnectOnInternet();
+            if (verify == true)
+            {
+                await requestLicencaRPL.RecuperarAcessoDefault(itens.UserName, itens.EmailUsuario, itens.Password);
+                if (requestLicencaRPL.Success == true)
+                {
+                    StateSucessMensage(requestLicencaRPL.MensageResponse);
+                    await Task.Delay(1500);
+                }
+                else
+                {
+                    StateErrorMensage(requestLicencaRPL.MensageResponse);
+                    await Task.Delay(1500);
+                }
+            }
+            else
+            {
+                StateErrorMensage("Verifique a sua conexão a internet!");
+                await Task.Delay(1500);
+            }
+
+        }
+        else
+        {
+            StateErrorMensage(employeeRPL.MensageResponse);
+            await Task.Delay(1500);
+        }
+
+        
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+}

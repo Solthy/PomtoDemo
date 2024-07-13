@@ -1,0 +1,17 @@
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.csproj.AssemblyReference.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.AssemblyInfoInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.AssemblyInfo.cs
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.csproj.CoreCompileInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoApplication.deps.json
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoApplication.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoApplication.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoDomain.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoInfraData.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoInfraData.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\bin\Debug\net8.0\PomtoDomain.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApp.2F39701A.Up2Date
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\refint\PomtoApplication.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\PomtoApplication.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApplication\obj\Debug\net8.0\ref\PomtoApplication.dll

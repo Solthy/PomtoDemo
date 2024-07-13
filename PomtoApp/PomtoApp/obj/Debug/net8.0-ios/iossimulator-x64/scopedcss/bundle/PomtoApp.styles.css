@@ -1,0 +1,620 @@
+/* /Components/Layout/MainLayout.razor.rz.scp.css */
+.page[b-f5s6jfxxmw] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-f5s6jfxxmw] {
+    flex: 1;
+}
+
+.sidebar[b-f5s6jfxxmw] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-f5s6jfxxmw] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-f5s6jfxxmw]  a, .top-row[b-f5s6jfxxmw]  .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+        .top-row[b-f5s6jfxxmw]  a:hover, .top-row[b-f5s6jfxxmw]  .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .top-row[b-f5s6jfxxmw]  a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+@media (max-width: 640.98px) {
+    .top-row[b-f5s6jfxxmw] {
+        justify-content: space-between;
+    }
+
+        .top-row[b-f5s6jfxxmw]  a, .top-row[b-f5s6jfxxmw]  .btn-link {
+            margin-left: 0;
+        }
+}
+
+@media (min-width: 641px) {
+    .page[b-f5s6jfxxmw] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-f5s6jfxxmw] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-f5s6jfxxmw] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+        .top-row.auth[b-f5s6jfxxmw]  a:first-child {
+            flex: 1;
+            text-align: right;
+            width: 0;
+        }
+
+    .top-row[b-f5s6jfxxmw], article[b-f5s6jfxxmw] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* /Components/Pages/InformationComponent.razor.rz.scp.css */
+.bodycontainer[b-tfyqnu61zb] {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cards[b-tfyqnu61zb] {
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: row; /* Alinha os itens na horizontal */
+    justify-content: space-around; /* Distribui o espa�o entre os itens uniformemente */
+    
+}
+
+.license-card[b-tfyqnu61zb] {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    height:480px;
+    text-align: center;
+    margin:10px;
+    opacity:0.9;
+}
+
+    .license-card .plan-info[b-tfyqnu61zb] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+        .license-card .plan-info img[b-tfyqnu61zb] {
+            width: 50px; /* Ajuste o tamanho da imagem conforme necess�rio */
+            margin-right: 10px; /* Espa�amento entre a imagem e o texto */
+        }
+
+    .license-card h2[b-tfyqnu61zb] {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #0277BD;
+    }
+
+    .license-card .price[b-tfyqnu61zb] {
+        font-weight: bold;
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .license-card .description[b-tfyqnu61zb] {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .license-card ul[b-tfyqnu61zb] {
+        list-style-type:none;
+        padding: 0;
+        margin-top: 15px;
+        margin-left:15px;
+        text-align:justify;
+    }
+
+        .license-card ul li[b-tfyqnu61zb] {
+            margin-bottom: 5px;
+        }
+
+    .license-card button[b-tfyqnu61zb] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .license-card button:hover[b-tfyqnu61zb] {
+            background-color: #0056b3;
+        }
+
+    .license-card .info[b-tfyqnu61zb] {
+        padding: 0;
+        margin-top: 10px;
+        margin-left: 15px;
+        text-align: start;
+    }
+
+/* /Components/Pages/LicenseComponent.razor.rz.scp.css */
+.card[b-afbtxdwf9f] {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity:0.8;
+}
+
+.centered-textcontent[b-afbtxdwf9f] {
+    margin:20px 0 0 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+}
+
+.centered-content[b-afbtxdwf9f] {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 130px;
+}
+    .centered-content label[b-afbtxdwf9f] {
+        margin-top: 0;
+    }
+    .centered-content h2[b-afbtxdwf9f] {
+        margin: 15px 0 10px 0;
+        color: #388E3C;
+    }
+
+.cardButton[b-afbtxdwf9f] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 20px 0 10px;
+    width:auto;
+}
+
+.card-content[b-afbtxdwf9f] {
+    padding: 20px; /* Espa�amento interno do conte�do do card */
+    background-color: lightgray;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    height: 80px;
+    display: flex;
+    justify-content:center; /* Espa�o uniforme entre os itens */
+}
+
+h2[b-afbtxdwf9f] {
+    font-size: 24px;
+    text-align: center;
+    margin:5px;
+    animation: wave-b-afbtxdwf9f 1.5s infinite; /* Anima��o de Onda */
+}
+
+@keyframes wave-b-afbtxdwf9f {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+/* /Components/Pages/LoginUsuarioComponent.razor.rz.scp.css */
+.card[b-dt0g1xhxtc] {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 420px;
+    padding: 20px;
+    height: 455px;
+    opacity:0.9;
+}
+
+.spanp[b-dt0g1xhxtc]{
+    color:darkorange;
+    font-size:22px;
+}
+
+.spancaption[b-dt0g1xhxtc] {
+    color:dimgray;
+    font-size: 15px;
+}
+
+.my-custom-class[b-dt0g1xhxtc] {
+    backdrop-filter: blur(10px);
+    background-color: whitesmoke;
+}
+
+.container[b-dt0g1xhxtc] {
+    width: 100%;
+    text-align: right;
+    text-align: end;
+}
+
+.submit-button[b-dt0g1xhxtc] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px 0 0 0;
+}
+
+    .submit-button:hover[b-dt0g1xhxtc] {
+        background-color: #0056b3;
+    }
+
+.create-account[b-dt0g1xhxtc] {
+    margin:10px;
+    text-align: center;
+    vertical-align:bottom
+}
+    .create-account a:hover[b-dt0g1xhxtc] {
+        text-decoration: underline;
+        color: #007bff;
+    }
+
+.forgot-password[b-dt0g1xhxtc] {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items:  flex-end;
+    margin: 0 10px 0 0;
+}
+
+    .forgot-password a[b-dt0g1xhxtc] {
+        text-decoration: none;
+    }
+
+    .forgot-password a:hover[b-dt0g1xhxtc] {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+
+.items[b-dt0g1xhxtc] {
+    display: inline-block;
+}
+
+.inputText[b-dt0g1xhxtc] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    text-align: right;
+}
+
+.containerDivider[b-dt0g1xhxtc] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 0 50px 0 50px;
+}
+
+/* /Components/Pages/NewAccountUserComponent.razor.rz.scp.css */
+.container[b-ov8djz31di] {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.card[b-ov8djz31di] {
+    width: 320px;
+    height: 90%;
+    margin:20px;
+    padding: 15px ;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .second-card[b-ov8djz31di] {
+    width: 320px;
+    height: 90%;
+    margin: 20px;
+    padding: 15px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card ul[b-ov8djz31di] {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .card ul li[b-ov8djz31di] {
+        margin: 10px 0 10px 0px;
+    }
+
+/* /Components/Pages/RecoveryPassComponent.razor.rz.scp.css */
+.card[b-lvxx8yq715] {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity:0.8;
+}
+
+.centered-content[b-lvxx8yq715] {
+    text-align: center;
+    align-items:center;
+}
+
+.cardButton[b-lvxx8yq715] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 15px 0 0;
+}
+
+.card-content[b-lvxx8yq715] {
+    display: flex;
+    justify-content: center; /* Espa�o uniforme entre os itens */
+}
+/* /Components/Pages/UserPerfilComponent.razor.rz.scp.css */
+.card-container[b-ka5yqfprb4] {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card[b-ka5yqfprb4] {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    opacity:0.9;
+}
+
+.card-title[b-ka5yqfprb4] {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-description[b-ka5yqfprb4] {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.card-containerTop[b-ka5yqfprb4] {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cardTop[b-ka5yqfprb4] {
+    width: 350px;
+    height: 150px;
+    padding: 20px;
+    margin: 0 0 20px;
+    background-color: #0077b6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .cardTop:hover[b-ka5yqfprb4] {
+        transform: translateY(-5px);
+        background-color: #0288D1;
+    }
+
+.card-titleTop[b-ka5yqfprb4] {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color:whitesmoke;
+}
+
+.card-descriptionTop[b-ka5yqfprb4] {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    color:whitesmoke
+}
+
+.container[b-ka5yqfprb4] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.button-container[b-ka5yqfprb4] {
+    margin-left: auto; /* Espa�o entre o conte�do e o bot�o */
+}
+
+buttonEdit[b-ka5yqfprb4] {
+    padding: 10px 20px;
+    background-color: #007bff; /* Cor de fundo do bot�o */
+    color: #fff; /* Cor do texto do bot�o */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.selected[b-ka5yqfprb4] {
+    background-color: #1E88E5 !important;
+}
+
+    .selected > td[b-ka5yqfprb4] {
+        color: white !important;
+    }
+
+        .selected > td .mud-input[b-ka5yqfprb4] {
+            color: white !important;
+        }
+
+/* /Components/Pages/WorkStationComponent.razor.rz.scp.css */
+.bodycontainer[b-r0ojz59hyw] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Organiza os elementos verticalmente e alinha-os no topo */
+    align-items: center; /* Alinha os elementos horizontalmente no centro */
+    min-height: 100vh; /* Define a altura m�nima da tela */
+}
+
+.header[b-r0ojz59hyw] {
+    background-color: transparent; /* Cor de fundo do header */
+    color: #fff; /* Cor do texto */
+    width: 100%; /* Ocupa toda a largura da p�gina */
+    padding: 20px; /* Espa�amento interno */
+    box-sizing: border-box; /* O padding n�o aumenta a largura do elemento */
+}
+
+.container[b-r0ojz59hyw] {
+    display: flex;
+    flex-direction: row; /* Alterado para organizar os itens horizontalmente */
+    justify-content: center; /* Alinha os itens horizontalmente no centro */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    width: 100%; /* Garante que o container ocupe toda a largura da div pai */
+    margin-top: 20px; /* Adiciona margem superior para separa��o */
+    margin-bottom: auto; /* Empurra o cart�o para o final da p�gina */
+}
+
+.containerProgress[b-r0ojz59hyw] {
+    width: 80%;
+    text-align: center;
+    margin-bottom: 15px; /* Adiciona margem inferior */
+}
+
+.progress-container[b-r0ojz59hyw] {
+    width: 100%;
+    height: 30px;
+    background-color: #007bff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Para o posicionamento absoluto do texto */
+}
+
+@keyframes fadeIn-b-r0ojz59hyw {
+    0% {
+        opacity: 0;
+    }
+    /* In�cio da anima��o: opacidade zero */
+    50% {
+        opacity: 1;
+    }
+    /* Metade da anima��o: opacidade total */
+    100% {
+        opacity: 0;
+    }
+    /* Fim da anima��o: opacidade zero */
+}
+
+.progress-value[b-r0ojz59hyw] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza verticalmente e horizontalmente */
+    opacity: 1; /* Inicialmente vis�vel */
+    animation: fadeIn-b-r0ojz59hyw 2s infinite; /* Transi��o de opacidade */
+    background-color: transparent; /* Cor de fundo igual ao do progress-container */
+}
+
+
+.text-container[b-r0ojz59hyw] {
+    margin-bottom: 3px; /* Adiciona margem inferior para separar do pr�ximo elemento */
+}
+
+.card[b-r0ojz59hyw] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 0 0 10px;
+}
+
+.card-content[b-r0ojz59hyw] {
+    background-color: #FAFAFA;
+    padding: 20px 20px 20px 20px; /* Espa�amento interno do conte�do do card */
+}
+
+.box[b-r0ojz59hyw] {
+    width: 300px;
+    margin: 0 5px;
+    padding: 15px;
+    text-align: start;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    opacity: 0.9;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transi��o para a mudan�a de cor e sombra */
+}
+
+    .box:hover[b-r0ojz59hyw] {
+        background-color: #ddd; /* Cor de realce ao passar o mouse */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra ao passar o mouse */
+        animation: ease-in-out 0.5s; /* Ativa a anima��o de fade-in */
+    }
+
+@keyframes fadeIn-b-r0ojz59hyw {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

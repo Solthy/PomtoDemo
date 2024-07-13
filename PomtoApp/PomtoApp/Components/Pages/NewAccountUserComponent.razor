@@ -1,0 +1,302 @@
+﻿@page "/new-account"
+<MudThemeProvider />
+<MudSnackbarProvider/>
+
+<MudTabs ApplyEffectsToContainer="true" Color="@Color.Info" Centered="true" @ref="tabs">
+    <MudTabPanel Text="Usuário" @ref="panelUser" Disabled="panel1">
+        <EditForm Model="@employeeRPL" OnValidSubmit="OnValidUserSubmit">
+            <DataAnnotationsValidator />
+            <div class="container">
+                <div class="card">
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudTextField Label="Nome Completo" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Máximo 30 Letras" ErrorText="Digite o seu nome"
+                                          @bind-Value="employeeRPL.NomeCompleto" For="@(() => employeeRPL.NomeCompleto)" />
+                            <MudTextField Label="Senha" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Escolha uma palavra-passe forte"
+                                          @bind-Value="employeeRPL.Password" For="@(() => employeeRPL.Password)" ErrorText="Digite a sua palavra-passe"
+                                          InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPass" AdornmentAriaLabel="Mostrar Senha" />
+
+                            <MudTextField Label="Confirmar Senha" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Repita a palavra-passe"
+                                          @bind-Value="employeeRPL.ConfirmPassword" For="@(() => employeeRPL.ConfirmPassword)" ErrorText="Senha não condiz com a primeira"
+                                          InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPass" AdornmentAriaLabel="Mostrar Senha" />
+
+                            <MudTextField Label="Email" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira um email válido"
+                                          @bind-Value="employeeRPL.UserEmail" For="@(() => employeeRPL.UserEmail)" ErrorText="Digite o seu email" />
+
+                            <MudDatePicker Variant="@Variant.Outlined" PickerVariant="PickerVariant.Dialog" Label="Data de Nascimento" HelperText="Insira a sua Data de Nascimento" DateFormat="dd/MM/yyyy" @bind-Date="employeeRPL.DataNascimento" />
+
+                            <MudTextField Label="Telefone" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira o seu número de Telefone"
+                                          @bind-Value="employeeRPL.NumeroTelefone" MaxLength="14" ErrorText="Digite o seu número de telefone" For="@(() => employeeRPL.NumeroTelefone)" InputType="InputType.Telephone" />
+                            <MudButton Color="@Color.Info" Variant="@Variant.Filled" Class="mt-3" StartIcon="@Icons.Outlined.ArrowForward" ButtonType="@ButtonType.Submit" OnClick="() => ScrollToPanel()" FullWidth>Avançar</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </div>
+            </div>
+        </EditForm>
+    </MudTabPanel>
+
+    <MudTabPanel Text="Empresa" @ref="panelCompany" Disabled="panel2">
+        <EditForm Model="@companyRPL" OnValidSubmit="OnValidCompanySubmit">
+            <DataAnnotationsValidator />
+            <div class="container">
+                <div class="card">
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudTextField Label="Nome Da Empresa" HelperText="Máximo 50 letras" Variant="@Variant.Outlined" Margin="@Margin.Dense"
+                                          @bind-Value="companyRPL.NomeEmpresa" ErrorText="Digite o nome da empresa a que está vinculado" For="@(() => companyRPL.NomeEmpresa)" />
+
+                            <MudTextField Label="Email Da Empresa" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira um email válido"
+                                          @bind-Value="companyRPL.EmailEmpresa" For="@(() => companyRPL.EmailEmpresa)" ErrorText="Digite o email da empresa a que está vinculado" />
+
+                            <MudTextField Label="NIF Da Empresa" OnBlur="OnBlurValid" Variant="@Variant.Outlined" Margin="@Margin.Dense"
+                                          @bind-Value="companyRPL.NIF" For="@(() => companyRPL.NIF)" Class="mt-3" ErrorText="Digite o nif da empresa a que está vinculado" />
+
+                            <MudRadioGroup @bind-Value="companyRPL.TipoEmpresa" Name="Tipo de Empresa" Disabled="true" Class="align-items-center">
+                                <MudRadio Value="@("Singular")" Dense="true">Singular</MudRadio>
+                                <MudRadio Value="@("Coletiva")" Dense="true">Coletivo</MudRadio>
+                            </MudRadioGroup>
+
+                            <MudSelect T="string" Margin="Margin.Dense" Variant="@Variant.Outlined" Class="mt-3" @bind-Value="employeeRPL.Profissao" For="@(() => employeeRPL.Profissao)" Label="Profissão:">
+                                @foreach (var itens in ListaProfissao)
+                                {
+                                    <MudSelectItem Value="@itens" />
+                                }
+                            </MudSelect>
+                            <MudNumericField @bind-Value="employeeRPL.ValorHora" Class="mt-3" HelperText="Insira o valor de remuneração" Placeholder="0,00" Margin="@Margin.Dense" Variant="@Variant.Outlined" ErrorText="Digite apenas números" Culture="_de" Adornment="Adornment.End" AdornmentText="Kz" For="@(() => employeeRPL.ValorHora)" Format="N2" Label="Remuneração" />
+                            <MudText Align="@Align.Start" Class="mt-2" Typo="@Typo.body2">Período da Remuneração</MudText>
+                            <MudRadioGroup @bind-Value="employeeRPL.TipoPagamento" Class="align-items-center">
+                                <MudRadio Value="@("Dia")" Dense="true">Dia</MudRadio>
+                                <MudRadio Value="@("Hora")" Dense="true">Hora</MudRadio>
+                                <MudRadio Value="@("Projeto")" Dense="true">Projeto</MudRadio>
+                            </MudRadioGroup>
+                            <MudButton Size="@Size.Medium" Class="mt-3 align-items-center" FullWidth OnClick="PickFolder" Variant="Variant.Outlined" EndIcon="@Icons.Material.Filled.Folder" Color="Color.Info">Selecionar Pastas</MudButton>
+                            <MudButton Color="@Color.Success" Class="mt-3" Variant="@Variant.Filled" StartIcon="@Icons.Outlined.Save" OnClick="CreateNewAccount" FullWidth ButtonType="@ButtonType.Submit">Salvar</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </div>
+            </div>
+        </EditForm>
+    </MudTabPanel>
+</MudTabs>
+
+@code {
+    bool isValidUserSucess;
+    bool isValidCompanySucess;
+
+    #region Controllers
+    CompanyRPL companyRPL = new CompanyRPL();
+    PathRPL pathRPL = new PathRPL();
+    EmployeeRPL employeeRPL = new EmployeeRPL();
+    ProfessionRPL professionRPL = new ProfessionRPL();
+    LicenseRPL licenseRPL = new LicenseRPL();
+    #endregion
+
+    #region Variáveis
+
+    public CultureInfo _de = CultureInfo.GetCultureInfo("de-DE");
+    public List<string> ListaProfissao { get; set; } = new();
+    public List<string> ListCaminhoPasta { get; set; } = new();
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    MudTabs tabs = new MudTabs();
+    MudTabPanel panelUser = new MudTabPanel();
+    MudTabPanel panelCompany = new MudTabPanel();
+
+    bool panel1 = false;
+    bool panel2 = true;
+
+    #endregion
+
+    void ShowPass()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    void Activate(MudTabPanel panel)
+    {
+        tabs.ActivatePanel(panel);
+    }
+
+    async void ScrollToPanel()
+    {
+        if (tabs.ActivePanel == panelUser)
+        {
+            if (employeeRPL.ValidUserBool(employeeRPL.NomeCompleto, employeeRPL.Password,employeeRPL.ConfirmPassword, employeeRPL.UserEmail) == true)
+            {
+                panel2 = false;
+                Activate(panelCompany);
+            }
+            else
+            {
+                StateErrorMensage("Preencha os campos necessários");
+                await Task.Delay(2000);
+            }
+        }
+        else if (tabs.ActivePanel == panelCompany)
+        {
+            if (companyRPL.ValidCompanyBool(companyRPL.NomeEmpresa, companyRPL.EmailEmpresa, companyRPL.NIF) == true)
+            {
+                panel2 = false;
+                Activate(panelCompany);
+            }
+            else
+            {
+                StateErrorMensage("Preencha os campos necessários");
+                await Task.Delay(2000);
+            }
+        }
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        var value = await professionRPL.GetItemsAsync();
+
+        foreach(var itens in value)
+        {
+            ListaProfissao.Add(itens.NomeProfissao);
+        }
+    }
+
+    private async Task CreateNewAccount()
+    {
+        if (await ExistUser() != true)
+        {
+            employeeRPL.UserName = employeeRPL.UserNomeFinal(employeeRPL.NomeCompleto, employeeRPL.DataNascimento);
+
+            if (employeeRPL.ValidUserBool(employeeRPL.NomeCompleto, employeeRPL.Password, employeeRPL.ConfirmPassword, employeeRPL.UserEmail)
+                    && companyRPL.ValidCompanyBool(companyRPL.NomeEmpresa,companyRPL.EmailEmpresa,companyRPL.NIF))
+            {
+                if (employeeRPL.UserValidToWork(employeeRPL.DataNascimento) == true)
+                {
+                    employeeRPL.Empresa = companyRPL.NomeEmpresa;
+                    await companyRPL.SaveItemAsync(companyRPL);
+                    await employeeRPL.SaveItemAsync(employeeRPL);
+                    await new PhoneEmployeeRPL().SaveItemAsync(employeeRPL);
+                    await new PhoneCompanyRPL().SaveItemAsync(companyRPL);
+                    foreach (var itens in ListCaminhoPasta)
+                    {
+                        await pathRPL.SaveItemAsync(new PathDTO
+                            {
+                                NomeUsuario = employeeRPL.NomeCompleto,
+                                CaminhoPasta = itens
+                            });
+                    }
+
+                    var userID = await employeeRPL.GetItemByNameAsync(employeeRPL.NomeCompleto);
+
+                    var baseLicensa = new LicencaDTO
+                        {
+                            DataExpiracao = DateTime.Now.AddDays(7),
+                            NumberLicensa = "XXXX-XXXX-XXXX",
+                            TipoLicensa = "Demo",
+                            UsuarioID = userID.ID,
+                            ID = 0
+                        };
+                    await licenseRPL.SaveItemAsync(baseLicensa);
+
+                    await App.Current.MainPage.DisplayAlert("Sucesso", $"O seu nome de Usuário é:\n {employeeRPL.UserName}\n Sua senha é: {employeeRPL.Password}\n\n Por favor guarde bem essas credencias, pois são necessárias ao iniciar a sessão!", "Ok");
+                    await App.Current.MainPage.Navigation.PopToRootAsync();
+                }
+                else
+                {
+                    StateErrorMensage("Ainda não possui 15 anos e por lei não apto para trabalhar!");
+                    await Task.Delay(2000);
+                }
+            }
+            else
+            {
+                StateErrorMensage("Preencha os campos necessários");
+                await Task.Delay(2000);
+            }
+        }
+        else
+        {
+            StateErrorMensage($"Já existe um usuário com o nome {employeeRPL.UserName} cadastrado!");
+            await Task.Delay(2000);
+        }
+
+        
+    }
+
+    async Task PickFolder()
+    {
+        var result = await FolderPicker.Default.PickAsync();
+        if (result.IsSuccessful)
+        {
+            bool itemsFilter = ListCaminhoPasta.Contains(result.Folder.Path);
+            if (itemsFilter != true)
+                ListCaminhoPasta.Add(result.Folder.Path);
+        }
+        else
+        {
+            employeeRPL.MensageResponse = $"A pasta não foi selecionada com o erro: {result.Exception.Message}";
+        }
+    }
+
+    private void OnValidUserSubmit(EditContext context)
+    {
+        isValidUserSucess = true;
+        StateHasChanged();
+    }
+
+    private void OnValidCompanySubmit(EditContext context)
+    {
+        isValidCompanySucess = true;
+        StateHasChanged();
+    }
+
+    private async Task OnBlurValid()
+    {
+        string type = companyRPL.ValidNif(companyRPL.NIF);
+        if (type == "Singular" || type == "Coletiva")
+            companyRPL.TipoEmpresa = type;
+        else
+        {
+            companyRPL.TipoEmpresa = type;
+            StateErrorMensage("Coloque um NIF válido");
+            await Task.Delay(2000);
+        }
+    }
+
+    private async Task<bool> ExistUser()
+    {
+        var users = await employeeRPL.GetItemsAsync();
+
+        string userName = employeeRPL.UserNomeFinal(employeeRPL.NomeCompleto, employeeRPL.DataNascimento).Trim();
+
+        bool filterUser = users.Exists(e => e.UserName == userName);
+
+        if (filterUser == true )
+            return true;
+        else
+            return false;
+    }
+}
+
+
+
+

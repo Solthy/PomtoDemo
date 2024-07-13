@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PomtoApp.Components.Pages"
+             x:Class="PomtoApp.Views.InformationPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/information.html">
+        <BlazorWebView.RootComponents>
+            <RootComponent Selector="#info" ComponentType="{x:Type local:InformationComponent}" />
+        </BlazorWebView.RootComponents>
+    </BlazorWebView>
+
+</ContentPage>

@@ -1,0 +1,108 @@
+.bodycontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Organiza os elementos verticalmente e alinha-os no topo */
+    align-items: center; /* Alinha os elementos horizontalmente no centro */
+    min-height: 100vh; /* Define a altura mínima da tela */
+}
+
+.header {
+    background-color: transparent; /* Cor de fundo do header */
+    color: #fff; /* Cor do texto */
+    width: 100%; /* Ocupa toda a largura da página */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* O padding não aumenta a largura do elemento */
+}
+
+.container {
+    display: flex;
+    flex-direction: row; /* Alterado para organizar os itens horizontalmente */
+    justify-content: center; /* Alinha os itens horizontalmente no centro */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    width: 100%; /* Garante que o container ocupe toda a largura da div pai */
+    margin-top: 20px; /* Adiciona margem superior para separação */
+    margin-bottom: auto; /* Empurra o cartão para o final da página */
+}
+
+.containerProgress {
+    width: 80%;
+    text-align: center;
+    margin-bottom: 15px; /* Adiciona margem inferior */
+}
+
+.progress-container {
+    width: 100%;
+    height: 30px;
+    background-color: #007bff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Para o posicionamento absoluto do texto */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    /* Início da animação: opacidade zero */
+    50% {
+        opacity: 1;
+    }
+    /* Metade da animação: opacidade total */
+    100% {
+        opacity: 0;
+    }
+    /* Fim da animação: opacidade zero */
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza verticalmente e horizontalmente */
+    opacity: 1; /* Inicialmente visível */
+    animation: fadeIn 2s infinite; /* Transição de opacidade */
+    background-color: transparent; /* Cor de fundo igual ao do progress-container */
+}
+
+
+.text-container {
+    margin-bottom: 3px; /* Adiciona margem inferior para separar do próximo elemento */
+}
+
+.card {
+    margin-top: auto; /* Coloca o cartão no final da página */
+    margin: 0 0 10px;
+}
+
+.card-content {
+    background-color: #FAFAFA;
+    padding: 20px 20px 20px 20px; /* Espaçamento interno do conteúdo do card */
+}
+
+.box {
+    width: 300px;
+    margin: 0 5px;
+    padding: 15px;
+    text-align: start;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    opacity: 0.9;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transição para a mudança de cor e sombra */
+}
+
+    .box:hover {
+        background-color: #ddd; /* Cor de realce ao passar o mouse */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra ao passar o mouse */
+        animation: ease-in-out 0.5s; /* Ativa a animação de fade-in */
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

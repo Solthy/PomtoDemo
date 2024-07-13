@@ -1,0 +1,150 @@
+﻿@page "/info"
+<MudSnackbarProvider />
+<MudThemeProvider />
+
+<div class="bodycontainer">
+    <div class="cards">
+        <div class="license-card">
+            <div class="plan-info">
+                <img src="img/pomto_icon.png" alt="Contactos">
+                <h2>Fale Conosco</h2>
+            </div>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle1">Ajude-nos a ajudar-lhe</MudText>
+            
+            <MudText Align="@Align.Center" Style="text-align:start;" Class="mt-3" Typo="@Typo.subtitle1">
+                <MudIcon Icon="@Icons.Material.Outlined.Phone" Color="@Color.Info" Class="mr-3" />944-610-560
+            </MudText>
+            <MudText Align="@Align.Center" Style="text-align:start" Typo="@Typo.subtitle1">
+                <MudIcon Icon="@Icons.Material.Outlined.Email" Color="@Color.Info" Class="mr-3"/>Earespomto@gmail.com
+            </MudText>
+            <MudText Align="@Align.Center" Style="text-align:start" Typo="@Typo.subtitle1">
+                <MudIcon Icon="@Icons.Material.Outlined.Business" Color="@Color.Info" Class="mr-3" />Angola, Luanda, Viana
+            </MudText>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle1" Class="mt-5 mb-3">Classifique-nos: @LabelText</MudText>
+            <MudRating @bind-SelectedValue="informationDTO.Classificao" HoveredValueChanged="HandleHoveredValueChanged" />
+            <MudTextField Class="mt-5" @bind-Value="informationDTO.Mensagem" For="@(() => informationDTO.Mensagem)" AutoGrow MaxLines="3" Label="Descrição" HelperText="Comente sobre o nosso produto" Variant="Variant.Outlined" />
+            <MudButton StartIcon="@Icons.Material.Filled.Send" Variant="Variant.Filled" Class="mt-3" Color="Color.Success" OnClick="SendComments" FullWidth>Enviar</MudButton>
+        </div>
+
+        <div class="license-card">
+            <div class="plan-info">
+                <img src="img/pomto_icon.png" alt="Plano Gratis">
+                <h2>Plano Grátis</h2>
+            </div>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle1">Plano Essencial de Produtividade</MudText>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle2" Class="mt-3">0 Kz/mês</MudText>
+            <MudText Align="@Align.Center" Typo="@Typo.body1" Class="mt-3">Recursos</MudText>
+            <ul>
+                <li>Anúncios</li>
+                <li>Horas Ilimitadas</li>
+                <li>Programas Ilimitadas</li>
+                <li>Envio de Relatório Ilimitadas</li>
+                <li>Relatório Detalhado (Txt)</li>
+                <li>Cálculo de Remuneração</li>
+            </ul>
+            <MudButton StartIcon="@Icons.Material.Filled.Info" Variant="Variant.Filled" Class="mt-14" Color="Color.Info" FullWidth>Detalhes</MudButton>
+        </div> 
+
+        <div class="license-card">
+            <div class="plan-info">
+                <img src="img/pomto_icon.png" alt="Plano Esmeralda" >
+                <h2>Plano Esmeralda</h2>
+            </div>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle1">Produtividade Completa</MudText>
+            <MudText Align="@Align.Center" Typo="@Typo.subtitle2" Class="mt-3">Brevemente</MudText>
+            <MudText Align="@Align.Center" Typo="@Typo.body1" Class="mt-3">Recursos</MudText>
+            <ul>
+                <li>Sem anúncios</li>
+                <li>Horas Ilimitadas</li>
+                <li>Programas Ilimitados</li>
+                <li>Envio de Relatórios Ilimitado</li>
+                <li>Envio de Ficheiros Ilimitado</li>
+                <li>Relatório Personalizado (PDF)</li>
+                <li>Cálculo de Remuneração</li>
+            </ul>
+            <MudButton Class="mt-14" StartIcon="@Icons.Material.Filled.Payments" Variant="Variant.Filled" OnClick="RequestLicense" Color="Color.Success" FullWidth>Solicitar</MudButton>
+        </div>
+    </div>
+</div>
+
+@code {
+    LoginRPL loginRPL = new LoginRPL();
+    InformationDTO informationDTO = new InformationDTO();
+    RequestLicencaRPL requestLicencaRPL = new RequestLicencaRPL();
+
+    private int selectedVal = 0;
+    private int? activeVal;
+
+    private void HandleHoveredValueChanged(int? val) => activeVal = val;
+
+    private string LabelText => (activeVal ?? informationDTO.Classificao) switch
+    {
+        1 => "Muito Mau",
+        2 => "Mau",
+        3 => "Útil",
+        4 => "Bom",
+        5 => "Incrível",
+        _ => ""
+    };
+
+    private async Task SendComments()
+    {
+        var userModel = await loginRPL.TakeUserLastLogin();
+
+        if (informationDTO.ValidInformationBool(informationDTO.Classificao) == true)
+        {
+            if (requestLicencaRPL.IsConnectOnInternet() == true)
+            {
+                await requestLicencaRPL.EnviarEmailDefaul(userModel.NomeCompleto, userModel.EmailUsuario, informationDTO.Classificao, informationDTO.Mensagem);
+                StateSucessMensage(requestLicencaRPL.MensageResponse);
+                await Task.Delay(2000);
+            }
+            else
+            {
+                StateErrorMensage("Verifique a sua conexão a internet!");
+                await Task.Delay(1500);
+            }
+        }
+        else
+        {
+            StateErrorMensage("Precisamos de uma classificação válida, por favor!");
+        }
+    }
+
+    private async Task RequestLicense()
+    {
+        if (requestLicencaRPL.IsConnectOnInternet() == true)
+        {
+            await requestLicencaRPL.NewRequestLicense();
+        }
+        else
+        {
+            StateErrorMensage("Verifique a sua conexão a internet!");
+            await Task.Delay(1500);
+        }
+
+        
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+}

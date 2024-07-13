@@ -1,0 +1,129 @@
+﻿@page "/license"
+<MudSnackbarProvider />
+<MudThemeProvider />
+
+<EditForm Model="@licenseRPL" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card">
+        <div class="centered-content">
+            <MudText Typo="Typo.h5" Style="color:#1565C0" Align="Align.Center">Tipo de Licença</MudText>
+            <h2>@licenseRPL.TipoLicensa</h2>
+            <MudText Typo="Typo.subtitle1" Style="color:#1565C0" Align="Align.Center">@licenseRPL.NumberLicensa</MudText>
+            <MudText Typo="Typo.body1" Style="color:#1565C0" Align="Align.Center">Data de Expiração da Licença</MudText>
+            <MudText Typo="Typo.caption" Style="color:#1565C0" Align="Align.Center">@licenseRPL.DataExpiracao</MudText>
+        </div>
+        <div class="centered-textcontent">
+            <MudTextField T="string" Style="text-align:center" Clearable Label="Série da Licença" HelperText="@mask2.Mask" Mask="@mask2" @bind-Value="licenseRPL.NumberLicensa" For="@(() => licenseRPL.NumberLicensa)" />
+        </div>
+        <MudButtonGroup OverrideStyles Variant="Variant.Text">
+            <MudButton StartIcon="@Icons.Material.Filled.Email" Variant="Variant.Outlined" Style="color:#0D47A1" OnClick="RequestLicense">Nova Licença</MudButton>
+            <MudButton StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Outlined" ButtonType="@ButtonType.Submit" OnClick="CreateLicense" Style="color:#388E3C">Salvar</MudButton>
+        </MudButtonGroup>
+    </div>
+</EditForm>
+
+@code {
+    LicenseRPL licenseRPL = new LicenseRPL();
+    RequestLicencaRPL requestLicencaRPL = new RequestLicencaRPL();
+
+    bool success;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await licenseRPL.GetDataLicencaAsync();
+
+        licenseRPL.NumberLicensa = data.NumberLicensa;
+        licenseRPL.TipoLicensa = data.TipoLicensa;
+        licenseRPL.DataExpiracao = data.DataExpiracao;
+
+        
+    }
+
+    private PatternMask mask2 = new PatternMask("XXXX-XXXX-XXXX")
+        {
+            MaskChars = new[] { new MaskChar('X', @"[0-9a-fA-F]") },
+            Placeholder = '_',
+            CleanDelimiters = true,
+            Transformation = AllUpperCase
+        };
+
+    private static char AllUpperCase(char c) => c.ToString().ToUpperInvariant()[0];
+
+    private async Task CreateLicense()
+    {
+        if (licenseRPL.ValidLicenseBool(licenseRPL.NumberLicensa) == true)
+        {
+            DateTime date = DateTime.Now;
+            int days = DateTime.DaysInMonth(date.Year, date.Month);
+
+            var licenseItem = new LicencaDTO
+                {
+                    DataExpiracao = DateTime.Now.AddDays(days),
+                    NumberLicensa = licenseRPL.NumberLicensa,
+                    TipoLicensa = "Esmeralda"
+                };
+
+            await licenseRPL.SaveItemAsync(licenseItem);
+
+            if (licenseRPL.Success == true)
+            {
+                StateSucessMensage($"{licenseRPL.MensageResponse} As aterações serão efetuadas assim que fizer o login novamente.");
+                await Task.Delay(2000);
+            }
+            else
+            {
+                StateErrorMensage(licenseRPL.MensageResponse);
+                await Task.Delay(2000);
+            }
+        }
+        else
+        {
+            StateErrorMensage("Preencha os campos necessários.");
+            await Task.Delay(2000);
+        }
+
+        
+    }
+
+    private async Task RequestLicense()
+    {
+        if (requestLicencaRPL.IsConnectOnInternet() == true)
+        {
+            await requestLicencaRPL.NewRequestLicense();
+        }
+        else
+        {
+            StateErrorMensage("Verifique a sua conexão a internet!");
+            await Task.Delay(1500);
+        }
+        
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+}

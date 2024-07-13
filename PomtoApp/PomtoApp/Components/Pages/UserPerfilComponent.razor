@@ -1,0 +1,468 @@
+﻿@page "/user-perfil"
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div class="card-containerTop">
+    <div class="cardTop">
+        <h2 class="card-titleTop">Horas Trabalhadas</h2>
+        <p class="card-descriptionTop">@timeWork Horas</p>
+        <MudIcon Class="mt-3" Style="color:white" Icon="@Icons.Material.Outlined.Timer" Title="Tempo" />
+    </div>
+    <div class="cardTop">
+        <h2 class="card-titleTop">Dias De Trabalho</h2>
+        <p class="card-descriptionTop">@daysWork Dias</p>
+        <MudIcon Class="mt-3" Style="color:white" Icon="@Icons.Material.Outlined.Work" Title="Trabalho" />
+    </div>
+    <div class="cardTop">
+        <h2 class="card-titleTop">Remuneração Estimada</h2>
+        <p class="card-descriptionTop">@paymentWork Kz</p>
+        <MudIcon Class="mt-3" Style="color:white" Icon="@Icons.Material.Outlined.MonetizationOn" Title="Dinheiro" />
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card">
+        <MudText Typo="Typo.h6" Style="@($"color:{Colors.LightBlue.Darken3};")">
+                <MudIcon Icon="@Icons.Material.Filled.Person" Style="@($"color:{Colors.LightBlue.Darken3};")" Class="mr-5" /> Usuário
+            </MudText>
+        <p class="card-description">Aqui encontra os dados de todas as contas de usuários presentes nesse dispositivo</p>
+        <MudTable T="UserPerfilDataRPL" Class="mt-3" Items="@userPerfil.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudUserTable"
+                  RowClass="cursor-pointer" RowClassFunc="@SelectedRowUserClassFunc" OnRowClick="RowClickUserEvent">
+            <HeaderContent>
+                <MudTh>Nome de Usuário</MudTh>
+                <MudTh>Profissão</MudTh>
+                <MudTh>Empresa</MudTh>
+                <MudTh>NIF</MudTh>
+                <MudTh>Email da Empresa</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nome de Usuário">@context.UserName</MudTd>
+                <MudTd DataLabel="Profissão">@context.Profissao</MudTd>
+                <MudTd DataLabel="Empresa">@context.NomeEmpresa</MudTd>
+                <MudTd DataLabel="NIF">@context.NIF</MudTd>
+                <MudTd DataLabel="Email da Empresa">@context.EmailEmpresa</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </div>
+    <div class="card">
+        <MudText Typo="Typo.h6" Style="@($"color:{Colors.LightBlue.Darken3};")">
+            <MudIcon Icon="@Icons.Material.Filled.FolderShared" Style="@($"color:{Colors.LightBlue.Darken3};")" Class="mr-5" /> Pastas de Trabalho
+        </MudText>
+        <p class="card-description">Aqui encontram-se os dados das suas pastas de Trabalho</p>
+        <MudTable T="PathRPL" Class="mt-3" Items="@userPaths.Take(30)" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
+                  RowClass="cursor-pointer" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent">
+            <HeaderContent>
+                <MudTh>Caminho das Pastas</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Pastas de Trabalho">@context.CaminhoPasta</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </div>
+</div>
+
+<MudDrawer @bind-Open="@open" Anchor="@anchor" Width="60%" Height="100%" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawerHeader>
+        <MudText Typo="Typo.h6" Color="@Color.Warning">Atualizar Perfil</MudText>
+    </MudDrawerHeader>
+    <EditForm Model="@perfilDataRPL" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <div class="card">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField Label="Nome Completo" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Máximo 30 Letras" ErrorText="Digite o seu nome"
+                                  @bind-Value="perfilDataRPL.NomeCompleto" For="@(() => perfilDataRPL.NomeCompleto)" />
+                    <MudTextField Label="Nome de Usuário" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Máximo 30 Letras" ErrorText="Digite o seu nome de usuário"
+                                  @bind-Value="perfilDataRPL.UserName" For="@(() => perfilDataRPL.UserName)" />
+                    <MudTextField Label="Senha" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Escolha uma palavra-passe forte"
+                                  @bind-Value="perfilDataRPL.Password" For="@(() => perfilDataRPL.Password)" ErrorText="Digite a sua palavra-passe"
+                                  InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPass" AdornmentAriaLabel="Mostrar Senha" />
+
+                    <MudTextField Label="Confirmar Senha" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Repita a palavra-passe"
+                                  @bind-Value="perfilDataRPL.ConfirmPassword" For="@(() => perfilDataRPL.ConfirmPassword)" ErrorText="Senha não condiz com a primeira"
+                                  InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPass" AdornmentAriaLabel="Mostrar Senha" />
+
+                    <MudTextField Label="Email" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira um email válido"
+                                  @bind-Value="perfilDataRPL.UserEmail" For="@(() => perfilDataRPL.UserEmail)" ErrorText="Digite o seu email" />
+
+                    <MudDatePicker Variant="@Variant.Outlined" PickerVariant="PickerVariant.Dialog" Label="Data de Nascimento" HelperText="Insira a sua Data de Nascimento" DateFormat="dd/MM/yyyy" For="@(() => perfilDataRPL.DataNascimento)" @bind-Date="perfilDataRPL.DataNascimento" />
+
+                    <MudTextField Label="Telefone" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira o seu número de Telefone"
+                                  @bind-Value="perfilDataRPL.NumeroTelefone" MaxLength="9" ErrorText="Digite o seu número de telefone" For="@(() => perfilDataRPL.NumeroTelefone)" InputType="InputType.Telephone" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Nome Da Empresa" HelperText="Máximo 50 letras" Variant="@Variant.Outlined" Margin="@Margin.Dense"
+                                  @bind-Value="perfilDataRPL.NomeEmpresa" ErrorText="Digite o nome da empresa a que está vinculado" For="@(() => perfilDataRPL.NomeEmpresa)" />
+
+                    <MudTextField Label="Email Da Empresa" Variant="@Variant.Outlined" Margin="@Margin.Dense" HelperText="Insira um email válido"
+                                  @bind-Value="perfilDataRPL.EmailEmpresa" For="@(() => perfilDataRPL.EmailEmpresa)" ErrorText="Digite o email da empresa a que está vinculado" />
+
+                    <MudTextField Label="NIF Da Empresa" HelperText="Mínimo 8 letras" Variant="@Variant.Outlined" Margin="@Margin.Dense"
+                                  @bind-Value="perfilDataRPL.NIF" For="@(() => perfilDataRPL.NIF)" ErrorText="Digite o nif da empresa a que está vinculado" />
+
+                    <MudRadioGroup @bind-Value="perfilDataRPL.TypeCompany" Name="Tipo de Empresa" Disabled="true" Class="align-items-center">
+                        <MudRadio Value="@("Singular")" Dense="true">Singular</MudRadio>
+                        <MudRadio Value="@("Coletiva")" Dense="true">Coletivo</MudRadio>
+                    </MudRadioGroup>
+                    <MudSelect T="string" Margin="Margin.Dense" Variant="@Variant.Outlined" @bind-Value="perfilDataRPL.Profissao" For="@(() => perfilDataRPL.Profissao)" Label="Profissão:">
+                        @foreach (var itens in ListaProfissao)
+                        {
+                            <MudSelectItem Value="@itens" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Telefone" HelperText="Insira o seu número de Telefone" MaxLength="9" Variant="@Variant.Outlined" Margin="@Margin.Dense"
+                                  @bind-Value="perfilDataRPL.EmpresaTelefone" For="@(() => perfilDataRPL.EmpresaTelefone)" ErrorText="Digite o número de telefone da empresa a que está vinculado" InputType="InputType.Telephone" />
+                    <MudTextField @bind-Value="perfilDataRPL.ValorHora" HelperText="Insira o valor de remuneração" Margin="@Margin.Dense" Variant="@Variant.Outlined" ErrorText="Digite apenas números" Adornment="Adornment.End" AdornmentText="Kz" For="@(() => perfilDataRPL.ValorHora)" Format="N2" Label="Remuneração" />
+                    <MudText Align="@Align.Start" Class="mt-2" Typo="@Typo.body2">Período da Remuneração</MudText>
+                    <MudRadioGroup @bind-Value="perfilDataRPL.TipoPagamento" Class="align-items-center">
+                        <MudRadio Value="@("Dia")" Dense="true">Dia</MudRadio>
+                        <MudRadio Value="@("Hora")" Dense="true">Hora</MudRadio>
+                        <MudRadio Value="@("Projeto")" Dense="true">Projeto</MudRadio>
+                    </MudRadioGroup>
+                    <MudButton Size="@Size.Medium" Class="mt-3 align-items-center" FullWidth OnClick="PickFolder" Variant="Variant.Outlined" EndIcon="@Icons.Material.Filled.Folder" Color="Color.Info">Selecionar Pastas</MudButton>
+                    <MudButton Color="@Color.Success" Class="mt-3" Variant="@Variant.Filled" StartIcon="@Icons.Outlined.Update" OnClick="UpdateUserAccount" ButtonType="@ButtonType.Submit" FullWidth>Atualizar</MudButton>
+                </MudItem>
+            </MudGrid>
+        </div>
+    </EditForm>
+</MudDrawer>
+
+@code {
+    UserPerfilDataRPL perfilDataRPL = new UserPerfilDataRPL();
+    EmployeeRPL employeeRPL = new EmployeeRPL();
+    PathRPL pathRPL = new PathRPL();
+
+    public ObservableCollection<UserPerfilDataRPL> userPerfil { get; set; } = new();
+    public ObservableCollection<PathRPL> userPaths { get; set; } = new();
+    public ObservableCollection<string> PathWork { get; set; } = new();
+
+    private int selectedRowNumber = -1;
+    private MudTable<PathRPL> mudTable;
+    private MudTable<UserPerfilDataRPL> mudUserTable;
+
+    public List<string> ListaProfissao { get; set; } = new();
+    public List<string> ListCaminhoPasta { get; set; } = new();
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    private string currentlyHoveredElement;
+
+    int timeWork = 0;
+    int daysWork = 0;
+    string paymentWork = string.Empty;
+    bool open;
+    bool isShow;
+    bool sucess;
+    Anchor anchor;
+
+    async Task OpenDrawer(Anchor anchor)
+    {
+        open = true;
+        this.anchor = anchor;
+
+        open = true;
+        this.anchor = anchor;
+
+        var dataUser = await perfilDataRPL.PopulatePerfilModel();
+
+        perfilDataRPL.UsuarioID = dataUser.UsuarioID;
+        perfilDataRPL.NomeCompleto = dataUser.NomeCompleto;
+        perfilDataRPL.Password = dataUser.Password;
+        perfilDataRPL.UserName = dataUser.UserName;
+        perfilDataRPL.UserEmail = dataUser.UserEmail;
+        perfilDataRPL.DataNascimento = dataUser.DataNascimento;
+        perfilDataRPL.TelefoneUsuarioID = dataUser.TelefoneUsuarioID;
+        perfilDataRPL.NumeroTelefone = dataUser.NumeroTelefone;
+        perfilDataRPL.ValorHora = dataUser.ValorHora;
+        perfilDataRPL.TipoPagamento = dataUser.TipoPagamento;
+
+        perfilDataRPL.EmpresaID = dataUser.EmpresaID;
+        perfilDataRPL.NomeEmpresa = dataUser.NomeEmpresa;
+        perfilDataRPL.EmailEmpresa = dataUser.EmailEmpresa;
+        perfilDataRPL.NIF = dataUser.NIF;
+        perfilDataRPL.TypeCompany = dataUser.TypeCompany;
+        perfilDataRPL.TelefoneEmpresaID = dataUser.TelefoneEmpresaID;
+        perfilDataRPL.EmpresaTelefone = dataUser.EmpresaTelefone;
+
+        ListaProfissao.Select(s => s == dataUser.Profissao).FirstOrDefault();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Populate();
+        
+    }
+
+    private async Task Populate()
+    {
+        var dataUser = await perfilDataRPL.PopulateFieldsPerfilModel();
+        var dataPath = await perfilDataRPL.PopulatePathPerfilModel();
+        var dataCarrer = await perfilDataRPL.GetAllCarrer();
+
+        userPerfil.Add(new UserPerfilDataRPL
+            {
+                UserName = dataUser.UserName,
+                UserEmail = dataUser.UserEmail,
+                Profissao = dataUser.Profissao,
+                NomeEmpresa = dataUser.NomeEmpresa,
+                NIF = dataUser.NIF,
+                EmailEmpresa = dataUser.EmailEmpresa
+            });
+        if(dataPath != null && dataPath.Count != 0)
+        {
+            foreach (var itens in dataPath)
+            {
+                var item = dataPath.Where(w => w.CaminhoPasta == itens.CaminhoPasta).FirstOrDefault();
+                if (userPaths.Contains(item) != true)
+                    userPaths.Add(new PathRPL
+                        {
+                            CaminhoPasta = item.CaminhoPasta
+                        });
+            }
+        }
+        
+        foreach (var itens in dataCarrer)
+        {
+            if (ListaProfissao.Contains(itens) != true)
+                ListaProfissao.Add(itens);
+        }
+
+        timeWork = dataUser.HoraTrabalho;
+        daysWork = dataUser.DiasTrabalho;
+        paymentWork = dataUser.Payment;
+    }
+
+    private async Task UpdateUserAccount()
+    {
+            if (perfilDataRPL.ValidPerfilBool(perfilDataRPL.NomeCompleto, perfilDataRPL.UserName, perfilDataRPL.Password, perfilDataRPL.ValorHora, perfilDataRPL.TipoPagamento) == true)
+            {
+                if (perfilDataRPL.ValidNif(perfilDataRPL.NIF) != string.Empty)
+                {
+                    var baseUserModel = new UserDTO
+                        {
+                            ID = perfilDataRPL.UsuarioID,
+                            NomeCompleto = perfilDataRPL.NomeCompleto.Trim(),
+                            UserName = perfilDataRPL.UserName.Trim(),
+                            Password = perfilDataRPL.Password.Trim(),
+                            UserEmail = perfilDataRPL.EmailConvertToLowerCase(perfilDataRPL.UserEmail.Trim()),
+                            DataNascimento = perfilDataRPL.DataNascimento,
+                            TelefoneID = perfilDataRPL.TelefoneUsuarioID,
+                            NumeroTelefone = perfilDataRPL.NumeroTelefone.Trim(),
+                            ValorHora = perfilDataRPL.ValorHora,
+                            TipoPagamento = perfilDataRPL.TipoPagamento.Trim(),
+                            Profissao = perfilDataRPL.Profissao
+                        };
+
+                    var baseCompanyModel = new CompanyDTO
+                        {
+                            ID = perfilDataRPL.EmpresaID,
+                            EmailEmpresa = perfilDataRPL.EmailConvertToLowerCase(perfilDataRPL.EmailEmpresa.Trim()),
+                            NomeEmpresa = perfilDataRPL.NomeEmpresa.Trim(),
+                            NIF = perfilDataRPL.NIF.Trim(),
+                            TipoEmpresa = perfilDataRPL.ValidNif(perfilDataRPL.NIF),
+                            TelefoneID = perfilDataRPL.TelefoneEmpresaID
+                        };
+
+                    var responseUpdate = await perfilDataRPL.UpdateUserPerfil(baseUserModel, baseCompanyModel, ListCaminhoPasta);
+
+                    if (responseUpdate == true)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Sucesso", $"O seu nome de Usuário é: {baseUserModel.UserName}\n Sua senha é: {baseUserModel.Password}\n\n Por favor guarde bem essas credencias, pois são necessárias ao iniciar a sessão!", "Ok");
+                    }
+                    else
+                        await App.Current.MainPage.DisplayAlert("Notificação", "Ainda não é maior de Idade", "Ok");
+
+                    StateHasChanged();
+                }
+                else
+                    await App.Current.MainPage.DisplayAlert("Notificação", "Este NIF não é válido", "Ok");
+            }
+            else
+            {
+                StateErrorMensage("Preencha os campos necessários");
+                await Task.Delay(2000);
+            }
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        sucess = true;
+        StateHasChanged();
+    }
+
+    void ShowPass()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    async Task PickFolder()
+    {
+        var result = await FolderPicker.Default.PickAsync();
+        if (result.IsSuccessful)
+        {
+            bool itemsFilter = ListCaminhoPasta.Contains(result.Folder.Path);
+            if (itemsFilter != true)
+                ListCaminhoPasta.Add(result.Folder.Path);
+        }
+        else
+        {
+            perfilDataRPL.MensageResponse = $"A pasta não foi selecionada com o erro: {result.Exception.Message}";
+        }
+
+        
+    }
+
+    private async Task RowClickEvent(TableRowClickEventArgs<PathRPL> tableRowClickEventArgs)
+    {
+        bool state = await App.Current.MainPage.DisplayAlert("Notificação","Deseja remover essa pasta de trabalho?","Sim","Não");
+
+        if(state == true)
+        {
+            var deleteItem = new PathRPL { CaminhoPasta = tableRowClickEventArgs.Item.CaminhoPasta };
+            await perfilDataRPL.DeletePathPerfil(deleteItem);
+            userPaths.Remove(deleteItem);
+            StateSucessMensage(perfilDataRPL.MensageResponse);
+            await Task.Delay(2000);
+            StateHasChanged();
+        }
+
+        
+    }
+
+    private string SelectedRowClassFunc(PathRPL element, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            return string.Empty;
+        }
+        else if (mudTable.SelectedItem != null && mudTable.SelectedItem.Equals(element))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+    private async Task RowClickUserEvent(TableRowClickEventArgs<UserPerfilDataRPL> tableRowClickEventArgs)
+    {
+        string action = await App.Current.MainPage.DisplayActionSheet("O que deseja fazer?", "Cancel", null, "Editar", "Deletar");
+
+        if (action == "Editar")
+        {
+            await OpenDrawer(Anchor.End);
+        }
+        else if (action == "Deletar")
+        {
+            bool resposta = await App.Current.MainPage.DisplayAlert("Notificação", "Deseja realmente eliminar os seus dados? Esta ação é irreversível!","Sim","Não");
+
+            if(resposta == true)
+            {
+                var baseUserModel = new UserDTO
+                    {
+                        NomeCompleto = perfilDataRPL.NomeCompleto.Trim(),
+                        UserName = perfilDataRPL.UserNomeFinal(perfilDataRPL.NomeCompleto, perfilDataRPL.DataNascimento).Trim(),
+                        Password = perfilDataRPL.Password.Trim(),
+                        UserEmail = perfilDataRPL.EmailConvertToLowerCase(perfilDataRPL.UserEmail.Trim()),
+                        DataNascimento = perfilDataRPL.DataNascimento,
+                        NumeroTelefone = perfilDataRPL.NumeroTelefone.Trim(),
+                        ValorHora = perfilDataRPL.ValorHora,
+                        TipoPagamento = perfilDataRPL.TipoPagamento.Trim(),
+                        Profissao = perfilDataRPL.Profissao
+                    };
+
+                var baseCompanyModel = new CompanyDTO
+                    {
+                        EmailEmpresa = perfilDataRPL.EmailConvertToLowerCase(perfilDataRPL.EmailEmpresa.Trim()),
+                        NomeEmpresa = perfilDataRPL.NomeEmpresa.Trim(),
+                        NIF = perfilDataRPL.NIF.Trim(),
+                        TipoEmpresa = perfilDataRPL.ValidNif(perfilDataRPL.NIF)
+                    };
+
+                string itemDelete = await perfilDataRPL.DeleteUserPerfil(baseUserModel, baseCompanyModel);
+                StateSucessMensage(itemDelete);
+                await Task.Delay(2000);
+                StateWarningMensage("Será redirecionado a área de login! Obrigado...");
+                await Task.Delay(3000);
+                await App.Current.MainPage.Navigation.PopToRootAsync();
+            }
+            else
+            {
+               StateWarningMensage("Acção ignorada");
+               Task.Delay(1000);
+            }
+        }
+
+        
+    }
+
+    private string SelectedRowUserClassFunc(UserPerfilDataRPL element, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            return string.Empty;
+        }
+        else if (mudTable.SelectedItem != null && mudTable.SelectedItem.Equals(element))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateWarningMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Warning, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+}
+
+
+

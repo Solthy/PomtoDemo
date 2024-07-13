@@ -1,0 +1,54 @@
+﻿
+<MudDialog>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs="12">
+                <MudPaper Width="100%">
+                    <MudSelect OnOpen="InitializePopulate" T="string" @bind-Value="NomeProceso" For="@(() => NomeProceso)" Label="Selecione aqui..." AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var nome in activeProcesses)
+                        {
+                            <MudSelectItem Value="@nome"/>
+                        }
+                    </MudSelect>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+        <MudText Typo="Typo.caption" Class="mt-5" Align="Align.Center" Color="Color.Primary">@startProcessRPL.MensageResponse</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudToolBar Class="mt-2">
+            <MudButton StartIcon="@Icons.Material.Outlined.Close" Color="Color.Warning" OnClick="@Cancelar">Cancelar</MudButton>
+            <MudButton StartIcon="@Icons.Material.Outlined.Slideshow" Color="Color.Success" OnClick="@Iniciar">Iniciar</MudButton>
+        </MudToolBar>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    StartProcessRPL startProcessRPL = new StartProcessRPL();
+    public List<string> activeProcesses { get; set; } = new List<string>();
+    public string NomeProceso { get; set; } = string.Empty;
+
+    private async Task InitializePopulate()
+    {
+        var allProcess = startProcessRPL.GetActiveProcesses();
+        if (allProcess != null && allProcess.Count != 0)
+            foreach (var itens in allProcess)
+            {
+                activeProcesses.Add(itens);
+            }
+        else
+            await App.Current.MainPage.DisplayAlert("Notificação","Não foi encontrado nenhuma aplicação aberta! Por favor abra as suas aplicações de Trabalho","Ok");
+    }
+
+    private async Task Iniciar()
+    {
+        await startProcessRPL.StartProgram(NomeProceso);
+    }
+
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+    void Cancelar() => MudDialog.Cancel();
+}

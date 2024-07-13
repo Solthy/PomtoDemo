@@ -1,0 +1,94 @@
+.bodycontainer[b-tfyqnu61zb] {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cards[b-tfyqnu61zb] {
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: row; /* Alinha os itens na horizontal */
+    justify-content: space-around; /* Distribui o espa�o entre os itens uniformemente */
+    
+}
+
+.license-card[b-tfyqnu61zb] {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    height:480px;
+    text-align: center;
+    margin:10px;
+    opacity:0.9;
+}
+
+    .license-card .plan-info[b-tfyqnu61zb] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+        .license-card .plan-info img[b-tfyqnu61zb] {
+            width: 50px; /* Ajuste o tamanho da imagem conforme necess�rio */
+            margin-right: 10px; /* Espa�amento entre a imagem e o texto */
+        }
+
+    .license-card h2[b-tfyqnu61zb] {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #0277BD;
+    }
+
+    .license-card .price[b-tfyqnu61zb] {
+        font-weight: bold;
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .license-card .description[b-tfyqnu61zb] {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .license-card ul[b-tfyqnu61zb] {
+        list-style-type:none;
+        padding: 0;
+        margin-top: 15px;
+        margin-left:15px;
+        text-align:justify;
+    }
+
+        .license-card ul li[b-tfyqnu61zb] {
+            margin-bottom: 5px;
+        }
+
+    .license-card button[b-tfyqnu61zb] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .license-card button:hover[b-tfyqnu61zb] {
+            background-color: #0056b3;
+        }
+
+    .license-card .info[b-tfyqnu61zb] {
+        padding: 0;
+        margin-top: 10px;
+        margin-left: 15px;
+        text-align: start;
+    }
+

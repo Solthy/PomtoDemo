@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Trabalho</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .highlight {
+            color: #0077b6; /* Cor que deseja aplicar à parte negritada */
+            font-size: 18px;
+        }
+
+        .header,
+        .content,
+        .footer {
+            margin-bottom: 20px;
+        }
+
+            .content h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #0077b6;
+            }
+
+        .header {
+            padding: 10px 10px 0 10px;
+            border-radius: 8px 8px 0 0;
+            height: 900px;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 2px 0 0 0;
+            border-radius: 0 0 8px 8px;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background-color: #0077b6; /* Cor de fundo dourado escuro */
+            color: #fff; /* Cor do texto branco */
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px; /* Adiciona bordas curvas */
+            margin: 15px 0 0 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto 200px;
+            grid-template-rows: 200px; /* Define a altura da grelha como 200px */
+            grid-gap: 10px; /* Adicionamos um espaço entre as colunas */
+        }
+
+        .grid-item {
+            padding: 10px;
+            align-content: center;
+        }
+
+            .grid-item img {
+                width: 100%; /* Ajusta a largura da imagem para preencher o espaço do grid-item */
+                height: 100%; /* Ajusta a altura da imagem para preencher o espaço do grid-item */
+                object-fit: fill; /* Redimensiona a imagem para cobrir completamente o espaço do elemento */
+            }
+
+        .company-name {
+            font-size: 14px;
+        }
+
+        .user-money {
+            font-size: 18px;
+            font-weight: bold;
+            color: dimgray;
+        }
+
+        .report-title {
+            font-size: 45px;
+            font-weight: bold;
+            color: #0077b6;
+        }
+
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .info-column {
+            width: 60%;
+        }
+
+            .info-column p {
+                margin: 5px 0;
+            }
+
+        .datagrid {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+        }
+
+        .datagrid-header {
+            display: flex;
+            background-color: #3498db; /* Cor de fundo azul */
+            color: #fff; /* Cor do texto branco */
+            border-bottom: 1px solid #ccc;
+        }
+
+        .header-item {
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .datagrid-row {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .row-item {
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .datagrid-row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="card">
+            <div class="header">
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <div class="company-name">{{ CompanyName }}</div>
+                        <div class="report-title">Relatório de Atividades</div>
+                        <div class="user-money">Remuneração: {{ Money }}</div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="../ImageReport/pomto_icon.png" alt="Logo da Empresa">
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="info-column">
+                        <p><strong class="highlight">Nome:</strong> {{ UserName }}</p>
+                        <p><strong class="highlight">Data de Emissão:</strong> {{ DateEmissao }}</p>
+                    </div>
+                    <div class="info-column">
+                        <p><strong class="highlight">Horas de Trabalho:</strong> {{ TimeUser }}</p>
+                        <p><strong class="highlight">Email:</strong> {{ UserEmail }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <h2>Dados de Atividade</h2>
+        <div class="datagrid">
+            <div class="datagrid-header">
+                <div class="header-item">Atividade</div>
+            </div>
+            <div id="itens">
+                {% for item in AtivityWork %}
+                <div class="datagrid-row">
+                    <div class="row-item">{{ item }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h2> Dados de Trabalho</h2>
+        <div class="datagrid">
+            <div class="datagrid-header">
+                <div class="header-item"> Nome do Ficheiro</div>
+                <div class="header-item"> Nome da Pasta</div>
+                <div class="header-item"> Data de Alteração</div>
+            </div>
+            <div id="itens">
+                {% for item in WorkData %}
+                <div class="datagrid-row">
+                    <div class="row-item">{{ item.NomeFicheiro }}</div>
+                    <div class="row-item">{{ item.NomePasta }}</div>
+                    <div class="row-item">{{ item.DataAlteracao }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h2>Dados de Programa</h2>
+        <div class="datagrid">
+            <div class="datagrid-header">
+                <div class="header-item">Nome Programa</div>
+                <div class="header-item">Data de Alteração</div>
+            </div>
+            <div id="itens">
+                {% for item in WorkProgram %}
+                <div class="datagrid-row">
+                    <div class="row-item">{{ item.NomePrograma }}</div>
+                    <div class="row-item">{{ item.DataAlteracaoPrograma }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <h2>Imagem de Trabalho</h2>
+        <div class="datagrid" id="datagrid">
+            <div id="itens">
+                {% for item in WorkImagens %}
+                <div class="grid-itemImg">
+                    <h3>Imagem</h3>
+                    <img src="{{item}}" alt="Imagem" class="grid-image">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
+            <p> EARES - Todos os direitos reservados &copy; 2024</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,293 @@
+﻿@page "/workstation-page"
+@implements IDisposable
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider/>
+
+<div class="bodycontainer">
+	<div class="header">
+		<MudAppBar Color="Color.Info" Class="rounded" Fixed="false">
+			<div class="text-container">
+				<MudText Style="color:white" Align="@Align.Center">@Mensagem</MudText>
+			</div>
+			<MudSpacer />
+			<MudMenu AnchorOrigin="@Origin.TopCenter" Color="@Color.Inherit" TransformOrigin="@Origin.TopRight">
+				<ActivatorContent>
+					<MudChip Icon="@Icons.Material.Filled.Person" Style="background-color:#0D47A1;color:whitesmoke">Conta</MudChip>
+				</ActivatorContent>
+				<ChildContent>
+					<MudMenuItem OnClick="@PerfilPage" Icon="@Icons.Material.Filled.AccountCircle" IconColor="@Color.Info" Style="color:#263238">Perfil</MudMenuItem>
+					<MudMenuItem OnClick="@LicensePage" Icon="@Icons.Material.Filled.Payments" IconColor="@Color.Info" Style="color:#263238">Licença</MudMenuItem>
+					<MudMenuItem OnClick="@InformationPage" Icon="@Icons.Material.Filled.Help" IconColor="@Color.Info" Style="color:#263238">Sobre Nós</MudMenuItem>
+					<MudMenuItem OnClick="LogoutSession" Icon="@Icons.Material.Filled.Logout" IconColor="@Color.Error" Style="color:#263238">Terminar Secção</MudMenuItem>
+				</ChildContent>
+			</MudMenu>
+		</MudAppBar>
+	</div>
+	<div class="container">
+		<div class="box">
+			<div class="d-flex justify-center">
+				<MudImage ObjectFit="ObjectFit.Cover" Style="align-items:center"  Height="250" Width="300" Src="img/Comecar.png" Alt="Örebro Slott" Elevation="img1" Class="rounded-lg" />
+			</div>
+		</div>
+		<div class="box">
+			<div class="d-flex justify-center">
+				<MudImage ObjectFit="ObjectFit.Cover" Height="250" Width="300" Src="img/Durante.png" Alt="Örebro Slott" Elevation="img2" Class="rounded-lg" />
+			</div>
+		</div>
+		<div class="box">
+			<div class="d-flex justify-center">
+				<MudImage ObjectFit="ObjectFit.Cover" Height="250" Width="300" Src="img/Termino.png" Alt="Örebro Slott" Elevation="img3" Class="rounded-lg" />
+			</div>
+		</div>
+	</div>
+	<div class="containerProgress">
+		<MudProgressLinear Color="Color.Info" Size="Size.Large" Indeterminate="isWorking" Class="my-7">
+			<MudText Typo="Typo.subtitle1" Style="@($"color:{Colors.Grey.Lighten5};")">
+				<b>@ProgressMensagem</b>
+			</MudText>
+		</MudProgressLinear>
+	</div>
+	<div class="card">
+		<div class="card-content">
+			<MudButtonGroup Color="@Color.Inherit" Variant="Variant.Filled">
+				<MudButton StartIcon="@Icons.Material.Filled.HomeWork" Disabled="isStart" DisableElevation="true" Style="@($"color:{Colors.Blue.Darken4};")" OnClick="WorkState">@NameButton</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.StopCircle" Disabled="isStop" DisableElevation="true" Style="@($"color:{Colors.Red.Darken4};")" OnClick="StopWork">Stop</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.Apps" Disabled="isInitial" DisableElevation="true" Style="@($"color:{Colors.Orange.Darken4};")" OnClick="OpenDialogPrograma">Programas</MudButton>
+				<MudButton StartIcon="@Icons.Material.Filled.Send" Disabled="isSend" DisableElevation="true" Style="@($"color:{Colors.Teal.Darken1};")" OnClick="OpenDialogSend">Enviar</MudButton>
+			</MudButtonGroup>
+		</div>
+	</div>
+</div>
+
+@code {
+
+	#region Controller e Validate
+	EndWorkRPL endWorkRPL = new EndWorkRPL();
+	StartProcessRPL startProcessRPL = new StartProcessRPL();
+	ReadPathRPL readPathRPL = new ReadPathRPL();
+	TimeWorkRPL timeWorkRPL = new TimeWorkRPL();
+	PathRPL pathRPL = new PathRPL();
+	LoginRPL loginRPL = new LoginRPL();
+	#endregion
+
+	#region Variáveis
+	public string? Mensagem { get; set; } = "Bem-vindo à sua área de trabalho remota! Estamos aqui para ajuda-lo a ter um dia produtivo. Bom trabalho!";
+	public string ProgressMensagem { get; set; }
+	public bool isShow { get; set; } = false;
+	public bool isWorking { get; set; } = false;
+	public bool isInitial { get; set; } = true;
+	public bool isStop { get; set; } = true;
+	public bool isSend { get; set; } = true;
+	public bool isStart { get; set; } = false;
+	public string? Estado { get; set; }
+	public string? NameButton { get; set; } = "Iniciar";
+	public DateTime DateTime { get; set; } = DateTime.Now;
+	public List<string> PathsToWork = new();
+	int img1 = 24;
+	int img2 = 5;
+	int img3 = 5;
+	#endregion
+
+	protected override void OnInitialized()
+	{
+		ProgressMensagem = $"Horas de Trabalho por padrão: {timeWorkRPL.HoraTrabalho}";
+	}
+
+	private async Task<bool> InitializeWork()
+	{
+		bool isvalid;
+		var allPath = await pathRPL.TakePathToWork();
+		if (allPath != null && allPath.Count != 0)
+		{
+			isvalid = true;
+			foreach (var itens in allPath)
+				PathsToWork.Add(itens.NomePath);
+		}
+		else
+			isvalid = false;
+
+		return isvalid;
+	}
+
+	async Task WorkState()
+	{
+		if (isShow == false)
+		{
+			bool valid = await InitializeWork();
+			if (valid == true)
+			{
+				isShow = true;
+				isInitial = false;
+				isStop = false;
+				NameButton = "Pausar";
+				Mensagem = "Vamos lá! Encare cada tarefa com determinação e foco, pois cada momento é uma oportunidade para alcançar seus objetivos.";
+				await TrabalhoProgress();
+			}
+			else
+			{
+				StateErrorMensage("Não possui nenhuma pasta de Trabalho. Por favor cadastre!");
+				await Task.Delay(2000);
+			}
+		}
+		else
+		{
+			img1 = 24;
+			img2 = 5;
+			img3 = 5;
+			Estado = "Pause";
+			isShow = false;
+			isWorking = false;
+			isInitial = true;
+			NameButton = "Retomar";
+			Mensagem = "Descanse um pouco, faz muito bem! Mas volte rápido, temos que terminar logo...";
+		}
+	}
+
+	async Task StopWork()
+	{
+		Estado = "Stop";
+		isSend = false;
+		isWorking = false;
+		isInitial = true;
+		img1 = 5;
+		img2 = 5;
+		img3 = 24;
+		await startProcessRPL.StopProgram();
+		await timeWorkRPL.SaveItemAsync(new TimeWorkDTO { HoraTrabalho = timeWorkRPL.HoraTrabalho });
+		Mensagem = "Bom Trabalho! Terminou as suas tarefas de hoje com sucesso...";
+		NameButton = "Iniciar";
+	} 
+
+	private async Task TrabalhoProgress()
+	{
+		Estado = "Start";
+		do
+		{ 
+			if (_disposed)
+			{
+				return;
+			}
+
+			img1 = 5;
+			img2 = 24;
+			img3 = 5;
+
+			isInitial = false;
+			isStop = false;
+			isWorking = true;
+			DateTime dateTime = DateTime.Now;
+			timeWorkRPL.HoraTrabalho = dateTime.Hour - DateTime.Hour;
+			ProgressMensagem = $"Você está trabalhando firme há {timeWorkRPL.HoraTrabalho} horas!";
+
+			if (timeWorkRPL.UserHoursToWork(timeWorkRPL.HoraTrabalho) == false)
+			{
+				var resposta = await App.Current.MainPage.DisplayAlert("Notificação", "Já está fora do tempo padrão de Trabalho! Deseja terminar?", "Sim", "Não");
+				if (resposta == true)
+					Estado = "Stop";
+			}
+
+			StateHasChanged();
+			readPathRPL.ReadPath(PathsToWork);
+			await startProcessRPL.WriteProgram();
+
+			if (Estado == "Stop")
+			{
+				
+				await StopWork();
+				break;
+			}
+			else if (Estado == "Pause")
+				break;
+
+			await Task.Delay(1000);
+			
+		} while (Estado == "Start");
+		StateHasChanged();
+	}
+
+	void StateErrorMensage(string mensagem)
+	{
+		SnackbarService.Add(mensagem, Severity.Error, config =>
+			{
+				config.Onclick = snackbar =>
+				{
+					return Task.CompletedTask;
+				};
+			});
+	}
+
+	void StateSucessMensage(string mensagem)
+	{
+		SnackbarService.Add(mensagem, Severity.Success, config =>
+			{
+				config.Onclick = snackbar =>
+				{
+					return Task.CompletedTask;
+				};
+			});
+	}
+
+	private void OpenDialogPrograma()
+	{
+		var options = new DialogOptions { Position = DialogPosition.CenterLeft, MaxWidth = MaxWidth.Medium, FullWidth = true, CloseOnEscapeKey = true };
+		DialogService.Show<DialogPrograma>("Iniciar Programa", options);
+	}
+
+	private async Task OpenDialogSend()
+	{
+		if(timeWorkRPL.HoraTrabalho >= 4)
+		{
+			var options = new DialogOptions { Position = DialogPosition.CenterLeft, MaxWidth = MaxWidth.Medium, FullWidth = true, CloseOnEscapeKey = true };
+			DialogService.Show<DialogEndWork>("Fim de Trabalho");
+		}
+		else
+		{
+			var state = await App.Current.MainPage.DisplayAlert("Notificação","Tem certeza que não vai mais trabalhar? Ainda falta para completar 8h de trabalho","Sim","Não");
+			if(state == true)
+			{
+				var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true, CloseOnEscapeKey = true };
+				DialogService.Show<DialogEndWork>("Fim de Trabalho");
+			}
+		}
+	}
+
+	#region Links dos Menus
+
+	private async Task PerfilPage()
+	{
+		await App.Current.MainPage.Navigation.PushAsync(new UserPerfilPage());
+	}
+
+	private async Task InformationPage()
+	{
+		await App.Current.MainPage.Navigation.PushAsync(new InformationPage());
+	}
+
+	private async Task LicensePage()
+	{
+		await App.Current.MainPage.Navigation.PushAsync(new LicensePage());
+	}
+
+	private async Task LogoutSession()
+	{
+		string logoutMensage = await loginRPL.Logout();
+		StateErrorMensage(logoutMensage);
+		await Task.Delay(2000);
+		await App.Current.MainPage.Navigation.PopToRootAsync();
+	}
+
+	#endregion
+
+	bool SameDate(DateTime primaryDate)
+	{
+		bool sameDayAsToday = primaryDate.Day == DateTime.Today.Day &&
+							primaryDate.Month == DateTime.Today.Month &&
+							primaryDate.Year == DateTime.Today.Year;
+		return sameDayAsToday;
+	}
+
+	bool _disposed;
+	public void Dispose() => _disposed = true;
+}
+

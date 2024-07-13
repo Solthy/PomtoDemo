@@ -1,0 +1,144 @@
+﻿@page "/"
+<MudDialogProvider />
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@loginRPL" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card">
+    <MudCard Elevation="0">
+        <MudCardHeader>
+           <MudText Typo="Typo.h5" Style="@($"color:{Colors.LightBlue.Darken3};")">
+               Bem-Vindo ao <span class="spanp">POMTO</span>
+               <br/>
+                    <span class="spancaption">Trabalhe remotamente e controle melhor o seu dia</span>
+           </MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <div class="inputText">
+                    <MudTextField Variant="Variant.Outlined" HelperTextOnFocus="false" Clearable Margin="Margin.Dense" T="string" Label="Usuário:" @bind-Value="loginRPL.NomeUsuario" For="@(() => loginRPL.NomeUsuario)"></MudTextField>
+                </div>
+                <div class="containerDivider">
+                <MudDivider />
+                </div>
+                <div class="inputText">
+                    <MudTextField @bind-Value="loginRPL.Password" HelperTextOnFocus="false" For="@(() => loginRPL.Password)" Margin="Margin.Dense" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPass" AdornmentAriaLabel="Mostrar Senha" />
+                    </div>
+                <div class="forgot-password">
+                    <a @onclick="NavigateToRecoveryPage">Esqueceu a Senha?</a>
+                </div>
+        </MudCardContent>
+    </MudCard>
+        <button class="submit-button" type="submit" @onclick="NavigateToWorkPage">Login</button>
+
+        <div class="create-account">
+            <p>Não possui uma conta? <a style="color:#007bff" @onclick="NavigateToNewAccountPage">Crie uma</a></p>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    LoginRPL loginRPL = new LoginRPL();
+    LicenseRPL licensa = new LicenseRPL();
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    private async Task NavigateToNewAccountPage()
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new NewAccountPage());
+    }
+
+    private async Task NavigateToRecoveryPage()
+    {
+        await App.Current.MainPage.Navigation.PushAsync(new RecoveryPage());
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private async Task NavigateToWorkPage()
+    {
+        if (loginRPL.ValidLoginBool(loginRPL.NomeUsuario, loginRPL.Password) == true)
+        {
+            bool state = await loginRPL.ValidateLogin(loginRPL.NomeUsuario.Trim(), loginRPL.Password.Trim());
+
+            if (state == true)
+            {
+                if(await licensa.ValidLicenseAsync() == true)
+                {
+                    StateSucessMensage(loginRPL.MensageResponse + licensa.MensageResponse);
+                    loginRPL.NomeUsuario = string.Empty;
+                    loginRPL.Password = string.Empty;
+                    await Task.Delay(2000);
+                    await App.Current.MainPage.Navigation.PushAsync(new WorkPage());
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Notificação",$"{licensa.MensageResponse}","Ok");
+                    StateSucessMensage(loginRPL.MensageResponse);
+                    loginRPL.NomeUsuario = string.Empty;
+                    loginRPL.Password = string.Empty;
+                    await Task.Delay(2000);
+                    OpenDialogInformacao();
+                }
+            }
+            else
+            {
+                StateErrorMensage(loginRPL.MensageResponse);
+                await Task.Delay(2000);
+            }
+        }
+        else
+        {
+            StateErrorMensage("Preencha os campos necessários");
+            await Task.Delay(2000);
+        }
+    }
+
+    private void OpenDialogInformacao()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<DialogInformation>("Fim da Demonstração", options);
+    }
+
+    void ShowPass()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();
+    }
+}

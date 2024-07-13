@@ -1,0 +1,132 @@
+﻿
+ <MudCard>
+    <MudCardContent>
+        <EditForm Model="@endWorkRPL" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudTextField @bind-Value="endWorkRPL.Descricao" ErrorText="Preencha este campo" For="@(() => endWorkRPL.Descricao)" Label="Descreva a sua atividade de hoje" Variant="Variant.Text" />
+            <MudButton Color="Color.Info" StartIcon="@Icons.Material.Outlined.UploadFile" Disabled="stateImg" FullWidth Class="mt-3">Carregar Imagens</MudButton>
+        </EditForm>
+        <MudDivider />
+        <MudText Color="Color.Primary" Align="Align.Center" Class="mt-3">@endWorkRPL.MensageResponse</MudText>
+        <MudTable T="EndWorkRPL" Class="mt-3" Items="@endWorks.Take(100)" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudEndWorkTable"
+                  RowClass="cursor-pointer" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent">
+            <HeaderContent>
+                <MudTh>Descrição de Tarefas</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Descrição">@context.Descricao</MudTd>
+            </RowTemplate>
+        </MudTable>
+        <MudTable T="EndWorkRPL" Class="mt-3" Items="@endWorksImg.Take(100)" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudEndWorkTable"
+                  RowClass="cursor-pointer" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent">
+            <HeaderContent>
+                <MudTh>Imagens</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Imagens">@context.Imagens</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton StartIcon="@Icons.Material.Outlined.Close" Color="Color.Warning" OnClick="@Cancelar">Cancelar</MudButton>
+        <MudButton Color="Color.Info" StartIcon="@Icons.Material.Outlined.Add" OnClick="AdicionarDescription">Adicionar</MudButton>
+        <MudButton Color="Color.Success" OnClick="SaveInformation" StartIcon="@Icons.Material.Outlined.Save" ButtonType="ButtonType.Submit" Disabled="state">Salvar</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    EndWorkRPL endWorkRPL = new EndWorkRPL();
+    PremiumReportRPL premiumReportRPL = new PremiumReportRPL();
+    ReportRPL reportRPL = new ReportRPL();
+    ReadPathRPL readPathRPL = new ReadPathRPL();
+    SendFilesRPL sendFilesRPL = new SendFilesRPL();
+    LicenseRPL licenseRPL = new LicenseRPL();
+
+    private MudTable<EndWorkRPL> mudEndWorkTable;
+    private int selectedRowNumber = -1;
+    bool state = true;
+    bool stateImg = true;
+
+    ObservableCollection<EndWorkRPL> endWorks { get; set; } = new();
+    ObservableCollection<EndWorkRPL> endWorksImg { get; set; } = new();
+
+    private void AdicionarDescription()
+    {
+        endWorks.Add(new EndWorkRPL { Descricao = endWorkRPL.Descricao });
+        state = false;
+    }
+
+    private async Task RowClickEvent(TableRowClickEventArgs<EndWorkRPL> tableRowClickEventArgs)
+    {
+        bool state = await App.Current.MainPage.DisplayAlert("Notificação", "Deseja remover essa descrição e atividade?", "Sim", "Não");
+
+        if (state == true)
+        {
+            var deleteItem = new EndWorkRPL { Descricao = tableRowClickEventArgs.Item.Descricao };
+            endWorks.Remove(deleteItem);
+            StateHasChanged();
+        }
+    }
+
+    private string SelectedRowClassFunc(EndWorkRPL element, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            return string.Empty;
+        }
+        else if (mudEndWorkTable.SelectedItem != null && mudEndWorkTable.SelectedItem.Equals(element))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+    private async void SaveInformation()
+    {
+        if (endWorks.Count != 0)
+        {
+            foreach (var itens in endWorks)
+            {
+                await endWorkRPL.SaveItemAsync(new EndWorkDTO
+                    {
+                        Descricao = itens.Descricao
+                    });
+                readPathRPL.WriteWorkInFile(itens.Descricao);
+            }
+            await reportRPL.GenerateReport(await endWorkRPL.PaymentSale());
+            await sendFilesRPL.ShareMultipleFiles();
+            new MoveFilesRPL().MoveFiles();
+            endWorkRPL.MensageResponse = reportRPL.MensageResponse;
+        }
+        else
+            endWorkRPL.MensageResponse = "Adicione pelo menos uma atividade para enviarmos!";
+        
+        
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();
+    }
+
+    public async Task TakePhoto()
+    {
+        FileResult photo = await MediaPicker.Default.PickPhotoAsync();
+
+        if (photo != null)
+        {
+            endWorksImg.Add(new EndWorkRPL { Imagens = photo.FullPath });
+        }
+    }
+
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+
+    void Cancelar() => MudDialog.Cancel();
+}

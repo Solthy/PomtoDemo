@@ -1,0 +1,67 @@
+.card[b-afbtxdwf9f] {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity:0.8;
+}
+
+.centered-textcontent[b-afbtxdwf9f] {
+    margin:20px 0 0 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+}
+
+.centered-content[b-afbtxdwf9f] {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 130px;
+}
+    .centered-content label[b-afbtxdwf9f] {
+        margin-top: 0;
+    }
+    .centered-content h2[b-afbtxdwf9f] {
+        margin: 15px 0 10px 0;
+        color: #388E3C;
+    }
+
+.cardButton[b-afbtxdwf9f] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 20px 0 10px;
+    width:auto;
+}
+
+.card-content[b-afbtxdwf9f] {
+    padding: 20px; /* Espa�amento interno do conte�do do card */
+    background-color: lightgray;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    height: 80px;
+    display: flex;
+    justify-content:center; /* Espa�o uniforme entre os itens */
+}
+
+h2[b-afbtxdwf9f] {
+    font-size: 24px;
+    text-align: center;
+    margin:5px;
+    animation: wave-b-afbtxdwf9f 1.5s infinite; /* Anima��o de Onda */
+}
+
+@keyframes wave-b-afbtxdwf9f {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}

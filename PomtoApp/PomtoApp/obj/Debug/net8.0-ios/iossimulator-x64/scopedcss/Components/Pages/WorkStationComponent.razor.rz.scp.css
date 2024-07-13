@@ -1,0 +1,108 @@
+.bodycontainer[b-r0ojz59hyw] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Organiza os elementos verticalmente e alinha-os no topo */
+    align-items: center; /* Alinha os elementos horizontalmente no centro */
+    min-height: 100vh; /* Define a altura m�nima da tela */
+}
+
+.header[b-r0ojz59hyw] {
+    background-color: transparent; /* Cor de fundo do header */
+    color: #fff; /* Cor do texto */
+    width: 100%; /* Ocupa toda a largura da p�gina */
+    padding: 20px; /* Espa�amento interno */
+    box-sizing: border-box; /* O padding n�o aumenta a largura do elemento */
+}
+
+.container[b-r0ojz59hyw] {
+    display: flex;
+    flex-direction: row; /* Alterado para organizar os itens horizontalmente */
+    justify-content: center; /* Alinha os itens horizontalmente no centro */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    width: 100%; /* Garante que o container ocupe toda a largura da div pai */
+    margin-top: 20px; /* Adiciona margem superior para separa��o */
+    margin-bottom: auto; /* Empurra o cart�o para o final da p�gina */
+}
+
+.containerProgress[b-r0ojz59hyw] {
+    width: 80%;
+    text-align: center;
+    margin-bottom: 15px; /* Adiciona margem inferior */
+}
+
+.progress-container[b-r0ojz59hyw] {
+    width: 100%;
+    height: 30px;
+    background-color: #007bff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Para o posicionamento absoluto do texto */
+}
+
+@keyframes fadeIn-b-r0ojz59hyw {
+    0% {
+        opacity: 0;
+    }
+    /* In�cio da anima��o: opacidade zero */
+    50% {
+        opacity: 1;
+    }
+    /* Metade da anima��o: opacidade total */
+    100% {
+        opacity: 0;
+    }
+    /* Fim da anima��o: opacidade zero */
+}
+
+.progress-value[b-r0ojz59hyw] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza verticalmente e horizontalmente */
+    opacity: 1; /* Inicialmente vis�vel */
+    animation: fadeIn-b-r0ojz59hyw 2s infinite; /* Transi��o de opacidade */
+    background-color: transparent; /* Cor de fundo igual ao do progress-container */
+}
+
+
+.text-container[b-r0ojz59hyw] {
+    margin-bottom: 3px; /* Adiciona margem inferior para separar do pr�ximo elemento */
+}
+
+.card[b-r0ojz59hyw] {
+    margin-top: auto; /* Coloca o cart�o no final da p�gina */
+    margin: 0 0 10px;
+}
+
+.card-content[b-r0ojz59hyw] {
+    background-color: #FAFAFA;
+    padding: 20px 20px 20px 20px; /* Espa�amento interno do conte�do do card */
+}
+
+.box[b-r0ojz59hyw] {
+    width: 300px;
+    margin: 0 5px;
+    padding: 15px;
+    text-align: start;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    opacity: 0.9;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transi��o para a mudan�a de cor e sombra */
+}
+
+    .box:hover[b-r0ojz59hyw] {
+        background-color: #ddd; /* Cor de realce ao passar o mouse */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra ao passar o mouse */
+        animation: ease-in-out 0.5s; /* Ativa a anima��o de fade-in */
+    }
+
+@keyframes fadeIn-b-r0ojz59hyw {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

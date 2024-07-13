@@ -1,0 +1,169 @@
+is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0-windows10.0.19041.0
+build_property.TargetPlatformMinVersion = 10.0.17763.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 9A19103F-16F7-4668-BE54-9A1E7A4F7556
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PomtoApp
+build_property.RootNamespace = PomtoApp
+build_property.ProjectDir = C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/InformationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.InformationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\InformationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\InformationPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/LicensePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.LicensePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\LicensePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\LicensePage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/NewAccountPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.NewAccountPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\NewAccountPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\NewAccountPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/RecoveryPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.RecoveryPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\RecoveryPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\RecoveryPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/UserPerfilPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.UserPerfilPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\UserPerfilPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\UserPerfilPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Views/WorkPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.Components.Views.WorkPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Components\Views\WorkPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Components\Views\WorkPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = PomtoApp.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Dialogs/DialogEndWork.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXERpYWxvZ0VuZFdvcmsucmF6b3I=
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Dialogs/DialogInformation.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXERpYWxvZ0luZm9ybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Dialogs/DialogPrograma.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXERpYWxvZ1Byb2dyYW1hLnJhem9y
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Routes.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/_Imports.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-f5s6jfxxmw
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/InformationComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbmZvcm1hdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-tfyqnu61zb
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/LicenseComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMaWNlbnNlQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-afbtxdwf9f
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/LoginUsuarioComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpblVzdWFyaW9Db21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-dt0g1xhxtc
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/NewAccountUserComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOZXdBY2NvdW50VXNlckNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-ov8djz31di
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/RecoveryPassComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWNvdmVyeVBhc3NDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-lvxx8yq715
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/UserPerfilComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyUGVyZmlsQ29tcG9uZW50LnJhem9y
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-ka5yqfprb4
+
+[C:/Users/Eliezer_Afonso/source/repos/PomtoApp/PomtoApp/Components/Pages/WorkStationComponent.razor]
+build_metadata.AdditionalFiles.GenKind = 
+build_metadata.AdditionalFiles.ManifestResourceName = 
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXb3JrU3RhdGlvbkNvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.RelativePath = 
+build_metadata.AdditionalFiles.CssScope = b-r0ojz59hyw

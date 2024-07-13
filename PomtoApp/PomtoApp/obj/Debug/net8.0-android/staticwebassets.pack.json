@@ -1,0 +1,121 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\obj\\Debug\\net8.0-android\\scopedcss\\bundle\\PomtoApp.styles.css",
+      "PackagePath": "staticwebassets\\PomtoApp.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\css\\newaccount.css",
+      "PackagePath": "staticwebassets\\css\\newaccount.css"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\css\\workstation.css",
+      "PackagePath": "staticwebassets\\css\\workstation.css"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Comecar.png",
+      "PackagePath": "staticwebassets\\img\\Comecar.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Durante.png",
+      "PackagePath": "staticwebassets\\img\\Durante.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Licenca.jpg",
+      "PackagePath": "staticwebassets\\img\\Licenca.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Login.jpg",
+      "PackagePath": "staticwebassets\\img\\Login.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\NewAccount.jpg",
+      "PackagePath": "staticwebassets\\img\\NewAccount.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Perfil.jpg",
+      "PackagePath": "staticwebassets\\img\\Perfil.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Planos.jpg",
+      "PackagePath": "staticwebassets\\img\\Planos.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Pomto_Logo.png",
+      "PackagePath": "staticwebassets\\img\\Pomto_Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Suport.jpg",
+      "PackagePath": "staticwebassets\\img\\Suport.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Termino.png",
+      "PackagePath": "staticwebassets\\img\\Termino.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\Work.jpg",
+      "PackagePath": "staticwebassets\\img\\Work.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\pomto_icon.ico",
+      "PackagePath": "staticwebassets\\img\\pomto_icon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\img\\pomto_icon.png",
+      "PackagePath": "staticwebassets\\img\\pomto_icon.png"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\information.html",
+      "PackagePath": "staticwebassets\\information.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\license.html",
+      "PackagePath": "staticwebassets\\license.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\new-account.html",
+      "PackagePath": "staticwebassets\\new-account.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\recovery-pass.html",
+      "PackagePath": "staticwebassets\\recovery-pass.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\user-perfil.html",
+      "PackagePath": "staticwebassets\\user-perfil.html"
+    },
+    {
+      "Id": "C:\\Users\\Eliezer_Afonso\\source\\repos\\PomtoApp\\PomtoApp\\wwwroot\\workstation.html",
+      "PackagePath": "staticwebassets\\workstation.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.PomtoApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.build.PomtoApp.props",
+      "PackagePath": "build\\PomtoApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.buildMultiTargeting.PomtoApp.props",
+      "PackagePath": "buildMultiTargeting\\PomtoApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-android\\staticwebassets\\msbuild.buildTransitive.PomtoApp.props",
+      "PackagePath": "buildTransitive\\PomtoApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

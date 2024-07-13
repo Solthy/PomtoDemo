@@ -1,0 +1,15 @@
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\bin\Debug\net8.0\PomtoViewModel.deps.json
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\bin\Debug\net8.0\PomtoViewModel.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\bin\Debug\net8.0\PomtoViewModel.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\bin\Debug\net8.0\PomtoDomain.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\bin\Debug\net8.0\PomtoDomain.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.csproj.AssemblyReference.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.AssemblyInfoInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.AssemblyInfo.cs
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.csproj.CoreCompileInputs.cache
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoVie.475AD629.Up2Date
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\refint\PomtoViewModel.dll
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\PomtoViewModel.pdb
+C:\Users\Eliezer_Afonso\source\repos\PomtoApp\PomtoViewModel\obj\Debug\net8.0\ref\PomtoViewModel.dll

@@ -1,0 +1,93 @@
+<MudDialog>
+    <DialogContent>
+        <MudText Align="@Align.Center" Typo="@Typo.subtitle1">Ajude-nos a ajudar-lhe</MudText>
+
+        <MudText Align="@Align.Center" Style="text-align:start;" Class="mt-3" Typo="@Typo.subtitle1">
+            <MudIcon Icon="@Icons.Material.Outlined.Phone" Color="@Color.Info" Class="mr-3" />944-610-560
+        </MudText>
+        <MudText Align="@Align.Center" Style="text-align:start" Typo="@Typo.subtitle1">
+            <MudIcon Icon="@Icons.Material.Outlined.Email" Color="@Color.Info" Class="mr-3" />Solthystartup@gmail.com
+        </MudText>
+        <MudText Align="@Align.Center" Style="text-align:start" Typo="@Typo.subtitle1">
+            <MudIcon Icon="@Icons.Material.Outlined.Business" Color="@Color.Info" Class="mr-3" />Angola, Luanda, Viana
+        </MudText>
+        <MudText Align="@Align.Center" Typo="@Typo.subtitle1" Class="mt-5 mb-3">Classifique-nos: @LabelText</MudText>
+        <MudRating @bind-SelectedValue="informationDTO.Classificao" HoveredValueChanged="HandleHoveredValueChanged" />
+        <MudTextField Class="mt-5" @bind-Value="informationDTO.Mensagem" For="@(() => informationDTO.Mensagem)" AutoGrow MaxLines="3" Label="Descrição" HelperText="Comente sobre o nosso produto" Variant="Variant.Outlined" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton StartIcon="@Icons.Material.Outlined.Close" Color="Color.Warning" OnClick="@Cancelar">Cancelar</MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Send" Variant="Variant.Filled" Class="mt-3 ml-2" Color="Color.Success" OnClick="SendComments" FullWidth>Enviar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    InformationDTO informationDTO = new InformationDTO();
+    LoginRPL loginRPL = new LoginRPL();
+    RequestLicencaRPL requestLicencaRPL = new RequestLicencaRPL();
+
+    private int selectedVal = 0;
+    private int? activeVal;
+
+    private void HandleHoveredValueChanged(int? val) => activeVal = val;
+
+    private string LabelText => (activeVal ?? informationDTO.Classificao) switch
+    {
+        1 => "Muito Mau",
+        2 => "Mau",
+        3 => "Útil",
+        4 => "Bom",
+        5 => "Incrível",
+        _ => ""
+    };
+
+    private async Task SendComments()
+    {
+        var userModel = await loginRPL.TakeUserLastLogin();
+
+        if (informationDTO.ValidInformationBool(informationDTO.Classificao) == true)
+        {
+            if (requestLicencaRPL.IsConnectOnInternet() == true)
+            {
+                await requestLicencaRPL.EnviarEmailDefaul(userModel.NomeCompleto, userModel.EmailUsuario, informationDTO.Classificao, informationDTO.Mensagem);
+                StateSucessMensage(requestLicencaRPL.MensageResponse);
+                await Task.Delay(2000);
+            }
+            else
+            {
+                StateErrorMensage("Verifique a sua conexão a internet!");
+                await Task.Delay(1500);
+            }
+        }
+        else
+        {
+            StateErrorMensage("Precisamos de uma classificação válida, por favor!");
+        }
+    }
+
+    private void StateSucessMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Success, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    private void StateErrorMensage(string mensagem)
+    {
+        SnackbarService.Add(mensagem, Severity.Error, config =>
+         {
+             config.Onclick = snackbar =>
+             {
+                 return Task.CompletedTask;
+             };
+         });
+    }
+
+    void Cancelar() => MudDialog.Cancel();
+}
